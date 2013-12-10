@@ -1,0 +1,23 @@
+\input{header.tex}
+\input{entete-baspage-titre.tex}
+\usepackage{lipsum}
+\begin{document}
+\input{title.tex}
+
+%{\setlength{\baselineskip}{1.15\baselineskip}	% Pour l'illusion d'avoir écrit plus...
+
+%\tableofcontents
+%\thispagestyle{empty}	% pour enlever le numéro de page
+\newpage
+\pagenumbering{arabic} % on triche avec la numéroation des pages :)
+
+\section{Introduction}
+\input{intro.tex}
+
+\section{Test de la vitesse d'horloge}
+\input{rapport_firstpart.tex}
+
+\section{Réveil}
+\input{reveil.tex}
+
+\end{document}

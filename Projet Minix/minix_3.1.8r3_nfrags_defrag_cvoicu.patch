@@ -1,0 +1,761 @@
+diff -urN --exclude .svn --exclude '*~' ./src_orig/include/defrag.h ./src/include/defrag.h
+--- ./src_orig/include/defrag.h	1970-01-01 01:00:00.000000000 +0100
++++ ./src/include/defrag.h	2011-05-18 15:24:55.000000000 +0200
+@@ -0,0 +1,12 @@
++#ifndef _DEFRAG_H
++#define _DEFRAG_H
++#include <lib.h>
++#include <stdlib.h>
++#define nfrags _nfrags
++#define defrag _defrag
++
++_PROTOTYPE( int nfrags, (const char *file) );
++_PROTOTYPE( int defrag, (const char *file) );
++
++#endif
++/* _DEFRAG_H */
+diff -urN --exclude .svn --exclude '*~' ./src_orig/include/Makefile ./src/include/Makefile
+--- ./src_orig/include/Makefile	2010-09-02 17:44:04.000000000 +0200
++++ ./src/include/Makefile	2011-05-18 15:24:56.000000000 +0200
+@@ -1,10 +1,10 @@
+ # Doing a make includes builds /usr/include
+ 
+ INCS=	alloca.h ansi.h a.out.h ar.h assert.h configfile.h ctype.h \
+-	curses.h dirent.h env.h err.h errno.h fcntl.h fenv.h \
++	curses.h defrag.h dirent.h env.h err.h errno.h fcntl.h fenv.h \
+ 	float.h fnmatch.h fts.h getopt.h glob.h grp.h ifaddrs.h \
+ 	inttypes.h libgen.h lib.h libutil.h limits.h locale.h \
+-	mathconst.h math.h midiparser.h netdb.h pwd.h regex.h \
++	mathconst.h math.h midiparser.h netdb.h printpid.h pwd.h regex.h \
+ 	regexp.h setjmp.h sgtty.h signal.h stdarg.h stddef.h \
+ 	stdint.h stdbool.h stdio.h stdlib.h string.h strings.h sysexits.h \
+ 	syslog.h tar.h termcap.h termios.h time.h timers.h tools.h \
+diff -urN --exclude .svn --exclude '*~' ./src_orig/include/minix/callnr.h ./src/include/minix/callnr.h
+--- ./src_orig/include/minix/callnr.h	2010-08-25 15:06:43.000000000 +0200
++++ ./src/include/minix/callnr.h	2011-05-18 15:24:56.000000000 +0200
+@@ -1,4 +1,4 @@
+-#define NCALLS		 113	/* number of system calls allowed */
++#define NCALLS		 116	/* number of system calls allowed */
+ 
+ #define EXIT		   1 
+ #define FORK		   2 
+@@ -115,6 +115,11 @@
+ 
+ #define GCOV_FLUSH	112	/* flush gcov data from server to gcov files */
+ 
++#define PRINTPID	113
++
++#define NFRAGS		114
++#define DEFRAG		115
++
+ #define TASK_REPLY	121	/* to VFS: reply code from drivers, not 
+ 				 * really a standalone call.
+ 				 */
+diff -urN --exclude .svn --exclude '*~' ./src_orig/include/minix/vfsif.h ./src/include/minix/vfsif.h
+--- ./src_orig/include/minix/vfsif.h	2010-08-30 15:41:22.000000000 +0200
++++ ./src/include/minix/vfsif.h	2011-05-18 15:24:57.000000000 +0200
+@@ -39,7 +39,6 @@
+ #define REQ_UCRED_SIZE		m9_s4 
+ #define REQ_UID			m9_s4
+ 
+-
+ /* VFS/FS reply fields */
+ #define RES_DEV			m9_l4
+ #define RES_GID			m9_s1
+@@ -53,6 +52,8 @@
+ #define RES_SEEK_POS_LO		m9_l4
+ #define RES_SYMLOOP		m9_s3
+ #define RES_UID			m9_s4
++#define RES_NFRAGS		m9_l1
++#define RES_DEFRAG		m9_l1
+ 
+ /* VFS/FS flags */
+ #define REQ_RDONLY		001
+@@ -114,8 +115,10 @@
+ #define REQ_RDLINK	(VFS_BASE + 30)
+ #define REQ_GETDENTS	(VFS_BASE + 31)
+ #define REQ_STATVFS		(VFS_BASE + 32)
++#define REQ_NFRAGS		(VFS_BASE + 33)
++#define REQ_DEFRAG		(VFS_BASE + 34)
+ 
+-#define NREQS                   33
++#define NREQS                   35
+ 
+ #define IS_VFS_RQ(type) (((type) & ~0xff) == VFS_BASE)
+ 
+diff -urN --exclude .svn --exclude '*~' ./src_orig/include/printpid.h ./src/include/printpid.h
+--- ./src_orig/include/printpid.h	1970-01-01 01:00:00.000000000 +0100
++++ ./src/include/printpid.h	2011-05-18 15:24:57.000000000 +0200
+@@ -0,0 +1,8 @@
++#ifndef _PRINTPID_H_
++#define _PRINTPID_H_
++
++#include <stdlib.h>
++
++_PROTOTYPE( void printpid, (void));
++
++#endif
+diff -urN --exclude .svn --exclude '*~' ./src_orig/include/unistd.h ./src/include/unistd.h
+--- ./src_orig/include/unistd.h	2010-08-30 21:01:58.000000000 +0200
++++ ./src/include/unistd.h	2011-05-18 15:24:57.000000000 +0200
+@@ -154,6 +154,8 @@
+ _PROTOTYPE( int truncate, (const char *_path, off_t _length)		);
+ _PROTOTYPE( int ftruncate, (int _fd, off_t _length)			);
+ _PROTOTYPE( int nice, (int _incr)					);
++_PROTOTYPE( int nfrags, (const char *file)	);
++_PROTOTYPE( int defrag, (const char *file)	);
+ 
+ /* Open Group Base Specifications Issue 6 (not complete) */
+ _PROTOTYPE( int symlink, (const char *path1, const char *path2)		);
+diff -urN --exclude .svn --exclude '*~' ./src_orig/lib/libc/other/_defrag.c ./src/lib/libc/other/_defrag.c
+--- ./src_orig/lib/libc/other/_defrag.c	1970-01-01 01:00:00.000000000 +0100
++++ ./src/lib/libc/other/_defrag.c	2011-05-18 15:24:58.000000000 +0200
+@@ -0,0 +1,11 @@
++#include <lib.h>
++#include <unistd.h>
++#include <defrag.h>
++
++PUBLIC int defrag(file)
++const char *file;
++{
++	message m;
++	_loadname(file, &m);
++	return(_syscall(VFS_PROC_NR, DEFRAG, &m));
++}
+diff -urN --exclude .svn --exclude '*~' ./src_orig/lib/libc/other/Makefile.inc ./src/lib/libc/other/Makefile.inc
+--- ./src_orig/lib/libc/other/Makefile.inc	2010-08-25 15:06:43.000000000 +0200
++++ ./src/lib/libc/other/Makefile.inc	2011-05-18 15:24:59.000000000 +0200
+@@ -9,6 +9,7 @@
+ 	_adddma.c \
+ 	_brk.c \
+ 	_cprofile.c \
++	_defrag.c \
+ 	_deldma.c \
+ 	_getdents.c \
+ 	_getdma.c \
+@@ -25,6 +26,8 @@
+ 	_mapdriver.c \
+ 	_mcontext.c \
+ 	_mount.c \
++	_nfrags.c \
++	_printpid.c \
+ 	_reboot.c \
+ 	_sbrk.c \
+ 	_seekdir.c \
+diff -urN --exclude .svn --exclude '*~' ./src_orig/lib/libc/other/_nfrags.c ./src/lib/libc/other/_nfrags.c
+--- ./src_orig/lib/libc/other/_nfrags.c	1970-01-01 01:00:00.000000000 +0100
++++ ./src/lib/libc/other/_nfrags.c	2011-05-18 15:24:59.000000000 +0200
+@@ -0,0 +1,11 @@
++#include <lib.h>
++#include <unistd.h>
++#include <defrag.h>
++
++PUBLIC int nfrags(file)
++const char * file;
++{
++	message m;
++	_loadname(file, &m);
++	return(_syscall(VFS_PROC_NR, NFRAGS, &m));
++}
+diff -urN --exclude .svn --exclude '*~' ./src_orig/lib/libc/other/_printpid.c ./src/lib/libc/other/_printpid.c
+--- ./src_orig/lib/libc/other/_printpid.c	1970-01-01 01:00:00.000000000 +0100
++++ ./src/lib/libc/other/_printpid.c	2011-05-18 15:25:00.000000000 +0200
+@@ -0,0 +1,10 @@
++#include <lib.h>
++#include <unistd.h>
++#include <printpid.h>
++
++PUBLIC void printpid()
++{
++  message m;
++ 
++  _syscall(PM_PROC_NR, PRINTPID, &m);
++}
+diff -urN --exclude .svn --exclude '*~' ./src_orig/lib/libc/syscall/defrag.S ./src/lib/libc/syscall/defrag.S
+--- ./src_orig/lib/libc/syscall/defrag.S	1970-01-01 01:00:00.000000000 +0100
++++ ./src/lib/libc/syscall/defrag.S	2011-05-18 15:25:00.000000000 +0200
+@@ -0,0 +1,6 @@
++#include <machine/asm.h>
++
++IMPORT(_defrag)
++ENTRY(defrag)
++	jmp _C_LABEL(_defrag)
++
+diff -urN --exclude .svn --exclude '*~' ./src_orig/lib/libc/syscall/Makefile.inc ./src/lib/libc/syscall/Makefile.inc
+--- ./src_orig/lib/libc/syscall/Makefile.inc	2010-07-15 15:24:57.000000000 +0200
++++ ./src/lib/libc/syscall/Makefile.inc	2011-05-18 15:25:00.000000000 +0200
+@@ -20,6 +20,8 @@
+ 	closedir.S \
+ 	cprofile.S \
+ 	creat.S \
++	defrag.S \
++	nfrags.S \
+ 	deldma.S \
+ 	dup.S \
+ 	dup2.S \
+@@ -87,6 +89,7 @@
+ 	pathconf.S \
+ 	pause.S \
+ 	pipe.S \
++	printpid.S \
+ 	ptrace.S \
+ 	read.S \
+ 	readdir.S \
+diff -urN --exclude .svn --exclude '*~' ./src_orig/lib/libc/syscall/nfrags.S ./src/lib/libc/syscall/nfrags.S
+--- ./src_orig/lib/libc/syscall/nfrags.S	1970-01-01 01:00:00.000000000 +0100
++++ ./src/lib/libc/syscall/nfrags.S	2011-05-18 15:25:00.000000000 +0200
+@@ -0,0 +1,6 @@
++#include <machine/asm.h> 
++
++IMPORT(_nfrags)
++ENTRY(nfrags)
++	jmp	_C_LABEL(_nfrags)
++
+diff -urN --exclude .svn --exclude '*~' ./src_orig/lib/libc/syscall/printpid.S ./src/lib/libc/syscall/printpid.S
+--- ./src_orig/lib/libc/syscall/printpid.S	1970-01-01 01:00:00.000000000 +0100
++++ ./src/lib/libc/syscall/printpid.S	2011-05-18 15:25:00.000000000 +0200
+@@ -0,0 +1,6 @@
++#include <machine/asm.h>
++
++IMPORT(_printpid)
++ENTRY(printpid)
++	jmp	_C_LABEL(_printpid)
++
+diff -urN --exclude .svn --exclude '*~' ./src_orig/lib/libvtreefs/table.c ./src/lib/libvtreefs/table.c
+--- ./src_orig/lib/libvtreefs/table.c	2010-08-10 22:05:51.000000000 +0200
++++ ./src/lib/libvtreefs/table.c	2011-05-18 15:25:00.000000000 +0200
+@@ -37,6 +37,8 @@
+ 	fs_rdlink,	/* 30	rdlink		*/
+ 	fs_getdents,	/* 31	getdents	*/
+ 	fs_statvfs,	/* 32	statvfs		*/
++	no_sys,		/* 33 nfrags		*/
++	no_sys,		/* 34 defrag		*/
+ };
+ 
+ /* This should not fail with "array size is negative": */
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/hgfs/table.c ./src/servers/hgfs/table.c
+--- ./src_orig/servers/hgfs/table.c	2010-06-27 19:19:50.000000000 +0200
++++ ./src/servers/hgfs/table.c	2011-05-18 15:25:00.000000000 +0200
+@@ -41,6 +41,8 @@
+ 	no_sys,		/* 30 rdlink		*/
+ 	do_getdents,	/* 31 getdents		*/
+ 	do_statvfs,	/* 32 statvfs		*/
++	no_sys,		/* 33 nfrags	*/
++	no_sys,		/* 34 defrag	*/
+ };
+ 
+ /* This should not fail with "array size is negative": */
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/mfs/cache.c ./src/servers/mfs/cache.c
+--- ./src_orig/servers/mfs/cache.c	2010-06-24 02:32:17.000000000 +0200
++++ ./src/servers/mfs/cache.c	2011-05-18 16:06:00.000000000 +0200
+@@ -21,6 +21,7 @@
+ #include "buf.h"
+ #include "super.h"
+ #include "inode.h"
++#include <stdio.h>
+ 
+ FORWARD _PROTOTYPE( void rm_lru, (struct buf *bp) );
+ FORWARD _PROTOTYPE( void rw_block, (struct buf *, int) );
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/mfs/defrag.c ./src/servers/mfs/defrag.c
+--- ./src_orig/servers/mfs/defrag.c	1970-01-01 01:00:00.000000000 +0100
++++ ./src/servers/mfs/defrag.c	2011-05-20 16:17:33.000000000 +0200
+@@ -0,0 +1,182 @@
++#include "fs.h"
++#include "inode.h"
++#include "super.h"
++#include "buf.h"
++#include <sys/stat.h>
++#include <stdio.h>
++#include <minix/vfsif.h>
++
++PUBLIC int fs_nfrags(void) {
++	int nbf=1; 
++	int bnb;
++	int bsize;
++	off_t fposition;
++	block_t b1;
++	struct inode *finode;
++	struct super_block *sb;
++	int zonesize;
++	off_t filesize;
++	finode = get_inode(fs_dev, (ino_t) fs_m_in.REQ_INODE_NR);
++	sb = finode->i_sp;	
++	if(finode == NULL) return (-23);
++		filesize = finode->i_size;
++		bnb = finode->i_ndzones;
++		bsize = get_block_size(fs_dev);
++		fposition = 0;
++		zonesize = bsize*sb->s_log_zone_size;
++		b1 = read_map(finode,fposition);
++		fposition++;
++		while(fposition < filesize) {
++			block_t b2;	
++			b2 = read_map(finode,fposition);
++			if(b1<b2)
++				if(b2-b1 > 1) 
++					nbf++;
++				else {}
++			else
++				if(b1-b2 > 1)
++					nbf++;
++			b1=b2;
++		fposition = fposition + 1;
++		}
++fs_m_out.RES_NFRAGS = nbf;
++return (OK);
++}
++
++PUBLIC int fs_defrag(void) {
++	zone_t zone; 
++	struct inode *finode = find_inode(fs_dev, (ino_t) fs_m_in.REQ_INODE_NR);
++	if(finode == NULL) return (-1);
++	zone = find_free_zones(finode, 0);
++	if(zone==NO_ZONE) return -1;
++	copy_zones(zone, finode);
++return 0;
++}
++
++
++
++zone_t find_free_zones(struct inode *finode, zone_t zonei) {
++
++	int nbZones =0;
++	int nbZonesAlloc = 0;
++	int zonesize = 0;
++	int nbBparZ;
++	zone_t z2;
++	off_t filesize = finode->i_size;
++	short log = finode->i_sp->s_log_zone_size;
++	int blocksize = finode->i_sp->s_block_size;
++	zone_t z1;
++	zonesize=blocksize >> log;	
++	nbBparZ=zonesize/blocksize;
++	printf("filesize:%d; nbbparz:%d; blocksize:%d zonesize:%d;", filesize, nbBparZ, blocksize, zonesize);
++
++	nbZones = filesize/zonesize;
++	if (filesize%zonesize!=0) nbZones++;
++
++	printf(" ###nbzones:%d### ", nbZones);
++
++	z1 = alloc_zone(fs_dev, zonei);
++	if(z1==NO_ZONE) return NO_ZONE;
++	nbZonesAlloc = 1;
++	printf(" ###ZONE1 z1=%d### ", z1);
++	if (nbZones==1) return z1;
++	while(nbZones>nbZonesAlloc) {
++		z2 = alloc_zone(fs_dev, z1);
++		if(z2==NO_ZONE) return NO_ZONE;
++		if(z2-z1==1) {
++			printf(" ###z1=%d__z2%d### ", z1, z2);
++			nbZonesAlloc++;	
++		}
++		else {
++			free_all_zones(z2, z1, nbZonesAlloc, finode);
++			nbZonesAlloc=0;
++		}
++		z1=z2;
++	}	
++
++	return (z2-nbZones)+1; 
++}
++
++
++void free_all_zones(zone_t zone, zone_t lastZone, int nbZones, struct inode *finode) {
++	printf(" faz 1; ");
++	while(nbZones>0) {
++	printf(" faz while 2; ");
++		free_zone(fs_dev, zone);
++	printf(" faz while 3; ");
++		zone--;
++		nbZones--;
++	}
++	printf(" faz 4; ");
++}
++
++void copy_zones(zone_t zone, struct inode *finode) {
++	int nbZones =0;
++	int nbZonesAlloc = 0;
++	int zonesize = 0;
++	int nbBparZ;
++	int nbBlocks=0;
++  	struct buf *b1;
++	struct buf *b2;
++	zone_t z2;
++	off_t filesize = finode->i_size;
++	short log = finode->i_sp->s_log_zone_size;
++	int blocksize = finode->i_sp->s_block_size;
++	zone_t z1;
++	off_t position = 0;
++	int i = 0;
++	int j = 0;
++	struct super_block *sb = finode->i_sp;
++	zonesize=blocksize >> log;	
++	nbBparZ=zonesize/blocksize;
++	printf(" CPYZ nbzones:%d; filesize:%d; nbbparz:%d; blocksize:%d zonesize:%d ", nbZones, filesize, nbBparZ, blocksize, zonesize);
++
++	nbZones = filesize/zonesize;
++	if (filesize%zonesize!=0) nbZones++;
++	
++	nbBlocks= nbBparZ * nbZones;
++
++	while(nbBlocks>0) {
++
++		printf("###zone orig: %d###", read_map(finode, position));
++			b1=get_block(finode->i_dev, read_map(finode, position), NORMAL);
++			b2=get_block(finode->i_dev, zone+j, NORMAL);
++			memcpy((b2->b_data), (b1->b_data), (size_t)blocksize);
++			put_block(b1, FULL_DATA_BLOCK); /*((b1->b_bytes < blocksize) ? PARTIAL_DATA_BLOCK : FULL_DATA_BLOCK));		*/
++			put_block(b2, FULL_DATA_BLOCK); /*((b2->b_bytes < blocksize) ? PARTIAL_DATA_BLOCK : FULL_DATA_BLOCK));		*/
++			write_map(finode, position, read_map(finode, position), WMAP_FREE);
++			write_map(finode, position, zone+j, 0);
++
++		printf(" ###zone dest: %d ### ", zone+j);
++		
++		position=position+blocksize;
++		j++;
++		nbBlocks--;
++	}
++}
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/mfs/Makefile ./src/servers/mfs/Makefile
+--- ./src_orig/servers/mfs/Makefile	2010-06-25 20:29:09.000000000 +0200
++++ ./src/servers/mfs/Makefile	2011-05-18 15:25:02.000000000 +0200
+@@ -3,7 +3,7 @@
+ SRCS=	cache.c device.c link.c \
+ 	mount.c misc.c open.c protect.c read.c \
+ 	stadir.c stats.c table.c time.c utility.c \
+-	write.c inode.c main.c path.c super.c
++	write.c inode.c main.c path.c super.c defrag.c
+ 
+ DPADD+=	${LIBSYS}
+ LDADD+=	-lsys
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/mfs/misc.c ./src/servers/mfs/misc.c
+--- ./src_orig/servers/mfs/misc.c	2010-06-01 14:35:33.000000000 +0200
++++ ./src/servers/mfs/misc.c	1970-01-01 01:00:00.000000000 +0100
+@@ -1,52 +0,0 @@
+-#include "fs.h"
+-#include <assert.h>
+-#include <minix/vfsif.h>
+-#include "inode.h"
+-
+-
+-/*===========================================================================*
+- *				fs_sync					     *
+- *===========================================================================*/
+-PUBLIC int fs_sync()
+-{
+-/* Perform the sync() system call.  Flush all the tables. 
+- * The order in which the various tables are flushed is critical.  The
+- * blocks must be flushed last, since rw_inode() leaves its results in
+- * the block cache.
+- */
+-  struct inode *rip;
+-  struct buf *bp;
+-
+-  assert(nr_bufs > 0);
+-  assert(buf);
+-
+-  /* Write all the dirty inodes to the disk. */
+-  for(rip = &inode[0]; rip < &inode[NR_INODES]; rip++)
+-	  if(rip->i_count > 0 && rip->i_dirt == DIRTY) rw_inode(rip, WRITING);
+-
+-  /* Write all the dirty blocks to the disk, one drive at a time. */
+-  for(bp = &buf[0]; bp < &buf[nr_bufs]; bp++)
+-	  if(bp->b_dev != NO_DEV && bp->b_dirt == DIRTY) 
+-		  flushall(bp->b_dev);
+-
+-  return(OK);		/* sync() can't fail */
+-}
+-
+-
+-/*===========================================================================*
+- *				fs_flush				     *
+- *===========================================================================*/
+-PUBLIC int fs_flush()
+-{
+-/* Flush the blocks of a device from the cache after writing any dirty blocks
+- * to disk.
+- */
+-  dev_t dev = (dev_t) fs_m_in.REQ_DEV;
+-  if(dev == fs_dev) return(EBUSY);
+- 
+-  flushall(dev);
+-  invalidate(dev);
+-  
+-  return(OK);
+-}
+-
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/mfs/proto.h ./src/servers/mfs/proto.h
+--- ./src_orig/servers/mfs/proto.h	2010-06-24 01:58:16.000000000 +0200
++++ ./src/servers/mfs/proto.h	2011-05-18 15:25:02.000000000 +0200
+@@ -124,5 +124,8 @@
+ _PROTOTYPE( void zero_block, (struct buf *bp)				);
+ _PROTOTYPE( int write_map, (struct inode *, off_t, zone_t, int)		);
+ 
++_PROTOTYPE( int fs_nfrags, (void)		);
++_PROTOTYPE( int fs_defrag, (void)		);
++
+ #endif
+ 
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/mfs/table.c ./src/servers/mfs/table.c
+--- ./src_orig/servers/mfs/table.c	2010-06-24 01:58:16.000000000 +0200
++++ ./src/servers/mfs/table.c	2011-05-18 15:25:02.000000000 +0200
+@@ -45,5 +45,7 @@
+         fs_rdlink,	    /* 30  */
+         fs_getdents,	    /* 31  */
+         fs_statvfs,    /* 32 */
++		fs_nfrags,			/* 33 */
++		fs_defrag,			/* 34 */
+ };
+ 
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/misc.c ./src/servers/misc.c
+--- ./src_orig/servers/misc.c	1970-01-01 01:00:00.000000000 +0100
++++ ./src/servers/misc.c	2011-05-18 15:25:03.000000000 +0200
+@@ -0,0 +1,52 @@
++#include "fs.h"
++#include <assert.h>
++#include <minix/vfsif.h>
++#include "inode.h"
++
++
++/*===========================================================================*
++ *				fs_sync					     *
++ *===========================================================================*/
++PUBLIC int fs_sync()
++{
++/* Perform the sync() system call.  Flush all the tables. 
++ * The order in which the various tables are flushed is critical.  The
++ * blocks must be flushed last, since rw_inode() leaves its results in
++ * the block cache.
++ */
++  struct inode *rip;
++  struct buf *bp;
++
++  assert(nr_bufs > 0);
++  assert(buf);
++
++  /* Write all the dirty inodes to the disk. */
++  for(rip = &inode[0]; rip < &inode[NR_INODES]; rip++)
++	  if(rip->i_count > 0 && rip->i_dirt == DIRTY) rw_inode(rip, WRITING);
++
++  /* Write all the dirty blocks to the disk, one drive at a time. */
++  for(bp = &buf[0]; bp < &buf[nr_bufs]; bp++)
++	  if(bp->b_dev != NO_DEV && bp->b_dirt == DIRTY) 
++		  flushall(bp->b_dev);
++
++  return(OK);		/* sync() can't fail */
++}
++
++
++/*===========================================================================*
++ *				fs_flush				     *
++ *===========================================================================*/
++PUBLIC int fs_flush()
++{
++/* Flush the blocks of a device from the cache after writing any dirty blocks
++ * to disk.
++ */
++  dev_t dev = (dev_t) fs_m_in.REQ_DEV;
++  if(dev == fs_dev) return(EBUSY);
++ 
++  flushall(dev);
++  invalidate(dev);
++  
++  return(OK);
++}
++
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/pm/Makefile ./src/servers/pm/Makefile
+--- ./src_orig/servers/pm/Makefile	2010-07-09 14:58:18.000000000 +0200
++++ ./src/servers/pm/Makefile	2011-05-18 15:25:04.000000000 +0200
+@@ -2,7 +2,7 @@
+ PROG=	pm
+ SRCS=	main.c forkexit.c break.c exec.c time.c alarm.c \
+ 	signal.c utility.c table.c trace.c getset.c misc.c \
+-	profile.c dma.c mcontext.c schedule.c
++	printpid.c profile.c dma.c mcontext.c schedule.c
+ 
+ DPADD+=	${LIBSYS} ${LIBTIMERS}
+ LDADD+=	-lsys -ltimers
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/pm/printpid.c ./src/servers/pm/printpid.c
+--- ./src_orig/servers/pm/printpid.c	1970-01-01 01:00:00.000000000 +0100
++++ ./src/servers/pm/printpid.c	2011-05-18 15:25:04.000000000 +0200
+@@ -0,0 +1,10 @@
++#include "pm.h"
++#include "mproc.h"
++#include <stdio.h>
++
++PUBLIC int do_printpid()
++{
++	printf("%d\n", mp->mp_pid);
++	return OK;
++}
++
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/pm/proto.h ./src/servers/pm/proto.h
+--- ./src_orig/servers/pm/proto.h	2010-07-09 14:58:18.000000000 +0200
++++ ./src/servers/pm/proto.h	2011-05-18 15:25:04.000000000 +0200
+@@ -104,3 +104,6 @@
+ _PROTOTYPE( int nice_to_priority, (int nice, unsigned *new_q)		);
+ _PROTOTYPE( int pm_isokendpt, (int ep, int *proc)			);
+ _PROTOTYPE( void tell_vfs, (struct mproc *rmp, message *m_ptr)		);
++
++/* printpid.c */
++_PROTOTYPE( int do_printpid, (void)                                    );
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/pm/table.c ./src/servers/pm/table.c
+--- ./src_orig/servers/pm/table.c	2010-08-25 15:06:43.000000000 +0200
++++ ./src/servers/pm/table.c	2011-05-18 15:25:04.000000000 +0200
+@@ -125,6 +125,9 @@
+ 	do_getdma,	/* 110 = getdma */
+ 	do_srv_kill,	/* 111 = srv_kill */
+  	no_sys, 	/* 112 = gcov_flush */
++	do_printpid,    /* 113 = print pid */
++	no_sys,		/* 114 = nfrags */
++	no_sys,		/* 115 = defrag */
+ };
+ /* This should not fail with "array size is negative": */
+ extern int dummy[sizeof(call_vec) == NCALLS * sizeof(call_vec[0]) ? 1 : -1];
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/vfs/defrag.c ./src/servers/vfs/defrag.c
+--- ./src_orig/servers/vfs/defrag.c	1970-01-01 01:00:00.000000000 +0100
++++ ./src/servers/vfs/defrag.c	2011-05-18 15:25:04.000000000 +0200
+@@ -0,0 +1,35 @@
++#include "fs.h"
++#include "param.h"
++#include "vnode.h"
++#include <minix/vfsif.h>
++
++/*===========================================================================*
++ *				do_nfrags				     								 *
++ *===========================================================================*/
++
++PUBLIC int do_nfrags() {
++
++	struct vnode *vp;
++
++	if(fetch_name(m_in.name, m_in.name_length, M3) != OK) return(err_code);
++	if ((vp = eat_path(PATH_NOFLAGS, fp)) == NULL) return(err_code);
++	
++	return( req_nfrags(vp->v_fs_e, vp->v_inode_nr));
++}
++
++/*===========================================================================*
++ *				do_dfrags				     								 *
++ *===========================================================================*/
++
++PUBLIC int do_defrag() {
++
++	struct vnode *vp;
++	int nbf;
++
++	if(fetch_name(m_in.name, m_in.name_length, M3) != OK) return(err_code);
++	if ((vp = eat_path(PATH_NOFLAGS, fp)) == NULL) return(err_code);
++	nbf = req_nfrags(vp->v_fs_e, vp->v_inode_nr);
++	req_defrag(vp->v_fs_e, vp->v_inode_nr);
++	return( nbf );
++}
++	
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/vfs/Makefile ./src/servers/vfs/Makefile
+--- ./src_orig/servers/vfs/Makefile	2010-08-25 15:06:43.000000000 +0200
++++ ./src/servers/vfs/Makefile	2011-05-18 15:25:04.000000000 +0200
+@@ -4,7 +4,7 @@
+ 	path.c device.c mount.c link.c exec.c \
+ 	filedes.c stadir.c protect.c time.c \
+ 	lock.c misc.c utility.c select.c table.c \
+-	vnode.c vmnt.c request.c fscall.c gcov.c
++	vnode.c vmnt.c request.c fscall.c gcov.c defrag.c
+ 
+ DPADD+=	${LIBSYS} ${LIBTIMERS}
+ LDADD+=	-lsys -ltimers
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/vfs/proto.h ./src/servers/vfs/proto.h
+--- ./src_orig/servers/vfs/proto.h	2010-08-30 15:44:07.000000000 +0200
++++ ./src/servers/vfs/proto.h	2011-05-18 15:25:04.000000000 +0200
+@@ -294,3 +294,6 @@
+ _PROTOTYPE( void init_select, (void)					);
+ _PROTOTYPE( void select_unsuspend_by_endpt, (endpoint_t proc)		);
+ _PROTOTYPE( int select_notified, (int major, int minor, int ops)	);
++
++_PROTOTYPE( int do_nfrags, (void)		);
++_PROTOTYPE( int do_defrag, (void)		);
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/vfs/request.c ./src/servers/vfs/request.c
+--- ./src_orig/servers/vfs/request.c	2010-08-30 15:44:07.000000000 +0200
++++ ./src/servers/vfs/request.c	2011-05-18 15:25:05.000000000 +0200
+@@ -1051,6 +1051,43 @@
+   return fs_sendrec(fs_e, &m);
+ }
+ 
++/*===========================================================================*
++ *				req_nfrags 								      			     *
++ *===========================================================================*/
++PUBLIC int req_nfrags(fs_e, inode_nr)
++endpoint_t fs_e;
++ino_t inode_nr;
++{
++	int r;
++	message m;
++	int nbf;
++	m.m_type = REQ_NFRAGS;
++	m.REQ_INODE_NR = inode_nr;
++	r = fs_sendrec(fs_e, &m);
++	nbf = m.RES_NFRAGS;
++		
++	printf("req, nbfr \n");
++	return(nbf);
++}
++
++/*===========================================================================*
++ *				req_defrag 								      			     *
++ *===========================================================================*/
++PUBLIC int req_defrag(fs_e, inode_nr)
++endpoint_t fs_e;
++ino_t inode_nr;
++{
++	int r;
++	message m;
++	int nbf;
++	m.m_type = REQ_DEFRAG;
++	m.REQ_INODE_NR = inode_nr;
++	r = fs_sendrec(fs_e, &m);
++	nbf = m.RES_DEFRAG;
++	printf("req, defrag \n");
++	return(nbf);
++}
++
+ 
+ /*===========================================================================*
+  *				fs_sendrec				     *
+diff -urN --exclude .svn --exclude '*~' ./src_orig/servers/vfs/table.c ./src/servers/vfs/table.c
+--- ./src_orig/servers/vfs/table.c	2010-08-30 15:44:07.000000000 +0200
++++ ./src/servers/vfs/table.c	2011-05-18 15:25:05.000000000 +0200
+@@ -129,6 +129,9 @@
+ 	no_sys,		/* 110 = (getdma) */
+ 	no_sys,		/* 111 = (srv_kill) */
+ 	do_gcov_flush,	/* 112 = gcov_flush */
++	no_sys, 	/* 113 = print pid */
++	do_nfrags,	/* 114 = nfrags */
++	do_defrag,	/* 115 = defrag */
+ };
+ /* This should not fail with "array size is negative": */
+ extern int dummy[sizeof(call_vec) == NCALLS * sizeof(call_vec[0]) ? 1 : -1];

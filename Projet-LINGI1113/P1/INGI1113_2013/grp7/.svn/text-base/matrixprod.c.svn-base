@@ -1,0 +1,196 @@
+#include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include "matrix.h"
+#include "sparseMatrix.h"
+#include "importFile.h"
+#include "exportFile.h"
+
+
+#define STD_OUTPUTFILE "./default_outputmatrixprod.txt"
+
+void sparseMultiply(FILE* file, char* outputPath){
+	int e = 0;
+	//reading loop
+	SpMat_List *sp_listFirst = malloc(sizeof(SpMat_List));
+	SpMat_List *sp_listLast;
+	SpMat_List *parser = sp_listFirst;
+	int count = 0;
+	while (!e){
+		count++;
+		int rows, columns;
+		e = getSize(&rows, &columns, file);
+		if(e == 1){
+			break;
+		}
+	
+		int tab[rows*columns];
+		e = readMatrix(rows, columns, file, tab);
+		if(e== -1){
+			return;
+		}
+		
+		parser->elem = initMat(tab, rows, columns);
+		parser->next = malloc(sizeof(SpMat_List));
+		sp_listLast = parser;
+		parser = parser->next;
+	}
+	free(parser);
+	sp_listLast->next = NULL;
+	closeInput(file);
+	printf("%d matrices read - beginning multiply operation\n", count);
+
+	// Multiplying loop
+	parser = sp_listFirst;
+	Sparsemat *a = parser-> elem;
+	if(parser->next == NULL){
+		printf("Only one matrix in input file - no possible multiplication\n");
+		return;
+	}
+	Sparsemat *b = parser->next->elem;
+	Sparsemat *result = multiply(a, b);
+	parser = parser->next->next;
+	while(parser != NULL ){
+		if(result == NULL){  // wrong dimensions
+			return;
+		}else if(result->first == NULL){ // multiplication by zero
+			printf("Multiplication by zero - result is a matrix of %d rows & %d columns with zeros\n", sp_listFirst->elem->rows, sp_listLast->elem->columns);
+			return;
+		}else{
+			Sparsemat *tmp = result;
+			result = multiply(result, parser->elem);
+			freeSparse(tmp);
+			parser = parser->next;
+		}
+	}
+	freeSparseList(sp_listFirst);
+	// Writing result	
+	if(result !=NULL){
+		exportRes(outputPath, result);
+		printf("Wrote result on %s file, ENJOY :)\n", outputPath);
+		freeSparse(result);
+	}
+	return;
+}
+
+void normalMultiply(FILE* file, char* outputPath, int choice){
+	int e = 0 ;
+	Mat_List *firstMat = malloc(sizeof(Mat_List));
+	Mat_List *lastMat;
+	Mat_List *parser = firstMat; 
+	int count = 0;
+	while (!e){
+		count++;
+		int rows, columns;
+		e = getSize(&rows, &columns, file);
+		if(e == 1){
+			break;
+		}
+	
+		int tab[rows*columns];
+		e = readMatrix(rows, columns, file, tab);
+		if(e== -1){
+			return;
+		}
+		
+		parser->mat=tab;
+		parser->rows = rows;
+		parser->columns = columns;
+		parser->next = malloc(sizeof(Mat_List));
+		lastMat = parser;
+		parser = parser->next;
+	}
+	free(parser); 
+	lastMat->next = NULL;
+	closeInput(file);
+	printf("%d matrices read - beginning multiply operation\n", count);
+
+	
+	// Multiplying loop
+	parser = firstMat;
+	if(parser->next == NULL){
+		printf("Only one matrix in input file - no possible multiplication\n");
+		return;
+	}
+	int resRows = parser->rows;
+	int resCol = parser->next->columns;
+	int *result = multiplyBis(parser->mat, parser->rows,parser->columns, parser->next->mat, parser->next->rows,parser->next->columns);
+	parser = parser->next->next;
+	while(parser != NULL ){
+		if(result == NULL){  // wrong dimensions
+			return;
+		}else{
+			int *tmp = result;  //Why?
+			result = multiplyBis(result, resRows, resCol, parser->mat, parser->rows,parser->columns);
+			resCol = parser->columns;
+			parser = parser->next;
+		}
+	}
+	// Writing result	
+	if(result !=NULL){
+		if(choice=2){
+			char* tmp = outputPath;
+			char outputPath[200];
+			strcpy(outputPath, "Normal Multiplication- ");	
+			strcat(outputPath, tmp);
+		}
+		exportSimpleMat(outputPath, result, resRows, resCol);
+		printf("Wrote result on %s file, ENJOY :)\n", outputPath);
+		free(outputPath);
+	}
+	return;
+}
+
+int main(int argc, char **argv){
+	// Read program arguments
+	char* inputPath;
+	char* outputPath = STD_OUTPUTFILE;
+	int choice=0;
+	int c;
+	while((c = getopt(argc,argv,"ndo:")) != -1){
+		switch(c){
+			case'n':
+				choice=1; // Normal multiplying (Not using sparsematrices)
+				break;
+			case'd':
+				choice=2; // Doing both multiplying types.
+			case'o':
+				outputPath = optarg;
+				break;
+			case '?': 
+				if(optopt == 'o'){
+					fprintf(stderr, "Option -%c requires an argument. (Path to output file)\n", optopt);
+				}else{
+					fprintf(stderr, "Unknown or invalid argument\n", optopt);
+				}
+				return 1;
+			default: abort();
+		}
+	}
+	
+	inputPath = argv[optind];
+	
+	if(inputPath==NULL){
+			fprintf(stderr, "Not input file to read\n");
+			return 1;
+	}
+	
+	printf("Input: %s\nOutput: %s \nChoice:%d\n", inputPath, outputPath, choice);
+	// Terminal args read - start reading
+	
+	//opening the file
+	FILE* file = openInput(inputPath);
+	if(file == NULL){
+		return 0; //error printed during openInput execution. 
+	}
+
+	if(choice != 1){
+		sparseMultiply(file, outputPath);
+	}
+	if(choice != 0){
+		normalMultiply(file, outputPath, choice);
+	}
+	return 0;
+}

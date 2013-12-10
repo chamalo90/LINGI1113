@@ -1,0 +1,14 @@
+\frametitle {Implémentation VFS}
+\begin{block}{L'implémentation de l'appel système effectue les vérifications suivantes avant de poursuivre l'appel dans MFS}
+\begin{lstlisting}
+if(fetch_name(m_in.name1,m_in.name1_length,M1)!=OK)
+     return err_code;
+vn=eat_path(PATH_NOFLAGS,fp);
+if(vn == NULL) return err_code;
+if((vn->v_mode & I_TYPE) != I_REGULAR){
+put_vnode(vn);
+return EPERM;
+}
+if (vp->v_ref_count != 1) return(EBUSY);
+\end{lstlisting}
+\end{block}

@@ -1,0 +1,22 @@
+Avant de penser 	à l'implémentation de la fonction principale du calcul de fragments, nous devions connaître le moyen d'ajouter des appels systèmes dans le système d'exploitation. Pour ajouter un appel système dans \textsc{Minix}, un nombre conséquent de fichiers doit être modifiés afin de reconnaître cet appel. Premièrement, il fallait savoir à quel processus système nous devions nous adresser. La fonction de calcul s'appliquant sur un système de fichier, le processus à atteindre était \textsc{VFS}. Il fallait donc ajouter le nom de la fonction dans un slot libre de la table d'appel de ce processus. Les numéros d'appel système de ce niveau étant répertoriés dans le fichier "\textsc{/src/include/minix/callnr.h}", nous avons également ajouté une constante représentant la position, dans la table, de l'appel nfrag. Puis, dans l'optique de respecter les conventions de programmation dans l'environnement de \textsc{Minix}, nous avons ajouté les prototypes de fonction dans "\textsc{/src/servers/vfs/proto.h}". Nous avons implémenté ces fonctions dans un nouveau fichier (dans le même répertoire) : "\textsc{frag.c}". Les opérations réalisées dans ce premier niveau de l'appel système sont: \begin{itemize}
+\item Vérification du \textit{path} donné en argument et récupération du chemin absolu vers ce fichier. (fonction \textit{fetch$\_$name})
+\item Récupération du \textit{vnode} associé au fichier.
+\item Vérification du type de fichier (renvoi d'erreur s'il s'agit fichier non régulier) et du nombre d'utilisateurs du fichier (si $> 1$, renvoi d'une erreur).
+\end{itemize} 
+Ensuite, nous avons découvert que les opérations précises sur des informations d'un système de fichier se faisaient en passant un message du processus gérant l'ensemble des systèmes de fichiers (VFS) au processus du système de fichier lui-même (MFS). 
+\begin{itemize}
+\item Transmission de la requête (numéro de l'inode à traiter) à "\textsc{/src/servers/vfs/request.c}".
+\end{itemize} 
+
+L'objectif suivant était donc d'ajouter un appel système s'exécutant dans le processus du système de fichier \textsc{Minix}. A nouveau, il fallait ajouter des constantes pour les numéros d'appel système (cette fois, dans le fichier "\textsc{/src/include/minix/vfsif.h}"), les noms des fonctions correspondantes dans la table (\textsc{mfs/table.c}) et définir les fonctions dans le fichier de prototypes. Ces nouvelles fonctions sont implémentées dans le fichier "\textsc{/src/servers/mfs/frags.c}". L'opération à effectuer pour \textsc{nfrag} consiste à compter le nombre de fragments du fichier donné en paramètre. 
+\subsection*{Choix d'implémentation}
+Plusieurs possibilités s'offraient à nous pour atteindre notre objectif. Nous avons choisi la méthode suivante :
+
+\begin{itemize}
+\item On récupère l'\textsc{inode} correspondant à notre fichier grâce au numéro d'\textsc{inode} passé par message dans l'appel système.
+\item On calcule le nombre de blocs dans une zone. Celui-ci est enregistré sous forme logarithmique (base 2) dans le super bloc du système de fichier. Pour obtenir le nombre réel d'une zone, il suffit d'utiliser l'opérateur "$<<$" (shift left). On peut obtenir la taille d'une zone en multipliant ce nombre par la taille d'un bloc.
+\item Pour compter les fragments, on va parcourir le fichier zone par zone et vérifier que celle-ci sont contigues. Comme l'accès à une zone ne se fait qu'à travers les blocs, on va utiliser le premier bloc de chaque zone. Si, pour deux zones consécutives dans les données du fichier, leurs premiers blocs respectifs sont situés à une longueur de zone près, les zones sont contigues.On va donc itérer l'offset d'une longueur de zone et utiliser la fonction \textsc{read$\_$map} pour obtenir le bloc voulu.
+\item On remet l'\textsc{inode} sur disque et on renvoie le nombre de fragments à travers le message.
+\end{itemize}
+
+Cette méthode permet de compter efficacement le nombre de fragments. Elle est valide car une zone ne peut appartenir qu'à un seul fichier. La fonction de librairie associée à l'appel système renvoie soit le nombre de fragments (résultat $\geq0$) soit l'erreur signalant un problème dans l'exécution de l'appel système. L'erreur respecte les conventions de constantes pour ce type d'événement. 

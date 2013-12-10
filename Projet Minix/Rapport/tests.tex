@@ -1,0 +1,14 @@
+Nous avons constitué un \textsc{Makefile} complet pour les tests à effectuer. D'abord, on crée une nouvelle partition \textsc{MFS} et on monte cette partition. Ensuite, On crée cinq fichiers de $4kB$. On retire le premier et le quatrième afin de créer deux trous dans la mémoire. Après, on écrit un fichier de $16kB$, celui-ci sera placé d'abord dans les trous créés et la suite sera mise après le cinquième fichier. On obtient donc trois fragments. En utilisant le programme de test ("\textsc{test.c}"), les résultats sont corrects. Le nombre de fragments est de 3 avant défragmentation et de 1 après. La commande diff n'affiche aucune différence et le programme de scan du système de fichier affiche un nombre d'inodes et de zones libres égaux aux valeurs précédant l'exécution du test. Nous testons également l'exécution sur un fichier non-existant et sur un répertoire, les erreurs renvoyées sont correctes.
+
+Les commandes make à utiliser pour lancer les tests sont :
+\begin{itemize}
+\item initmfs : initialise le système de fichier.
+\item mountdisk : monte la partition créée avec le path \textsc{/mount/disk}.
+\item createfiles : crée les fichiers nécessaires aux tests en fragmentant le fichier 6.
+\item test : compile le programme de test.
+\item runnfrags : effectue le test du calcul du nombre de fragments.
+\item rundefrag : effectue le test de défragmentation.
+\item checkfs: lance le programme de vérification du système de fichier.
+\item clean : efface les fichiers créés et démonte la partition.
+\end{itemize}
+L'utilisation de la commande \textsc{make} effectue tous les tests à la suite.

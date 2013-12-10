@@ -1,0 +1,25 @@
+\input{header.tex}
+\input{entete-baspage-titre.tex}
+\usepackage{lipsum}
+\begin{document}
+\input{title.tex}
+
+%{\setlength{\baselineskip}{1.15\baselineskip}	% Pour l'illusion d'avoir écrit plus...
+
+%\tableofcontents
+%\thispagestyle{empty}	% pour enlever le numéro de page
+\newpage
+\pagenumbering{arabic} % on triche avec la numéroation des pages :)
+\begin{spacing}{1.5}
+\section{Introduction}
+\input{intro.tex}
+\section{NFRAG}
+\input{nfrag.tex}
+\section{DEFRAG}
+\input{defrag.tex}
+\section{Stratégie de tests}
+\input{tests.tex}
+\section{Améliorations}
+\input{improve.tex}
+\end{spacing}
+\end{document}

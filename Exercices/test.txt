@@ -1,0 +1,35 @@
+./data_ex_2.txt
+fd: 3
+line 1 -apc×­ÿ
+line 2 -bpc×­ÿ
+line 3 -cpc×­ÿ
+line 4 -dpc×­ÿ
+line 5 -epc×­ÿ
+line 6 -fpc×­ÿ
+line 7 -gpc×­ÿ
+line 8 -hpc×­ÿ
+line 9 -ipc×­ÿ
+line 10 -jpc×­ÿ
+line 11 -kpc×­ÿ
+line 12 -lpc×­ÿ
+line 13 -mpc×­ÿ
+line 14 -npc×­ÿ
+line 15 -opc×­ÿ
+line 16 -ppc×­ÿ
+line 17 -qpc×­ÿ
+line 18 -rpc×­ÿ
+line 19 -spc×­ÿ
+line 20 -tpc×­ÿ
+line 21 -upc×­ÿ
+line 22 -vpc×­ÿ
+line 23 -wpc×­ÿ
+line 24 -xpc×­ÿ
+line 25 -ypc×­ÿ
+line 26 -zpc×­ÿ
+line 27 -apc×­ÿ
+line 28 -apc×­ÿ
+line 29 -apc×­ÿ
+line 30 -apc×­ÿ
+line 31 -
+line 32 -
+Le Fichier compter 32 lignes

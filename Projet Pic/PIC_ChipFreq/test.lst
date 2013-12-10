@@ -1,0 +1,2720 @@
+gplink-0.13.7 beta
+Copyright (c) 1998-2005 gputils project
+Listing File Generated: 3-26-2013  11:27:06
+ 
+ 
+Address  Value    Disassembly              Source
+-------  -----    -----------              ------
+                                           ;--------------------------------------------------------
+                                           ; File Created by SDCC : free open source ANSI-C Compiler
+                                           ; Version 2.9.4 #5595 (Mar 19 2013) (UNIX)
+                                           ; This file was generated Tue Mar 26 11:27:06 2013
+                                           ;--------------------------------------------------------
+                                           ; PIC16 port for the Microchip 16-bit core micros
+                                           ;--------------------------------------------------------
+                                           	list	p=18f97j60
+                                           
+                                           	radix dec
+                                           
+                                           ;--------------------------------------------------------
+                                           ; public variables in this module
+                                           ;--------------------------------------------------------
+                                           	global _InitDisplay
+                                           	global _ConfigTimer0
+                                           	global _ConfigTimer1
+                                           	global _LaunchTest
+                                           	global _DisplayWORD
+                                           	global _DisplayString
+                                           	global _strlcpy
+                                           	global _Timer0_value
+                                           	global _displayString
+                                           	global _main
+                                           	global _HighPriorityInterrupt
+                                           
+                                           ;--------------------------------------------------------
+                                           ; extern variables in this module
+                                           ;--------------------------------------------------------
+                                           	extern __gptrget1
+                                           	extern __gptrput1
+                                           	extern _EBSTCONbits
+                                           	extern _MISTATbits
+                                           	extern _EFLOCONbits
+                                           	extern _MACON1bits
+                                           	extern _MACON2bits
+                                           	extern _MACON3bits
+                                           	extern _MACON4bits
+                                           	extern _MACLCON1bits
+                                           	extern _MACLCON2bits
+                                           	extern _MICONbits
+                                           	extern _MICMDbits
+                                           	extern _EWOLIEbits
+                                           	extern _EWOLIRbits
+                                           	extern _ERXFCONbits
+                                           	extern _EIEbits
+                                           	extern _ESTATbits
+                                           	extern _ECON2bits
+                                           	extern _EIRbits
+                                           	extern _EDATAbits
+                                           	extern _SSP2CON2bits
+                                           	extern _SSP2CON1bits
+                                           	extern _SSP2STATbits
+                                           	extern _ECCP2DELbits
+                                           	extern _ECCP2ASbits
+                                           	extern _ECCP3DELbits
+                                           	extern _ECCP3ASbits
+                                           	extern _RCSTA2bits
+                                           	extern _TXSTA2bits
+                                           	extern _CCP5CONbits
+                                           	extern _CCP4CONbits
+                                           	extern _T4CONbits
+                                           	extern _ECCP1DELbits
+                                           	extern _BAUDCON2bits
+                                           	extern _BAUDCTL2bits
+                                           	extern _BAUDCONbits
+                                           	extern _BAUDCON1bits
+                                           	extern _BAUDCTLbits
+                                           	extern _BAUDCTL1bits
+                                           	extern _PORTAbits
+                                           	extern _PORTBbits
+                                           	extern _PORTCbits
+                                           	extern _PORTDbits
+                                           	extern _PORTEbits
+                                           	extern _PORTFbits
+                                           	extern _PORTGbits
+                                           	extern _PORTHbits
+                                           	extern _PORTJbits
+                                           	extern _LATAbits
+                                           	extern _LATBbits
+                                           	extern _LATCbits
+                                           	extern _LATDbits
+                                           	extern _LATEbits
+                                           	extern _LATFbits
+                                           	extern _LATGbits
+                                           	extern _LATHbits
+                                           	extern _LATJbits
+                                           	extern _DDRAbits
+                                           	extern _TRISAbits
+                                           	extern _DDRBbits
+                                           	extern _TRISBbits
+                                           	extern _DDRCbits
+                                           	extern _TRISCbits
+                                           	extern _DDRDbits
+                                           	extern _TRISDbits
+                                           	extern _DDREbits
+                                           	extern _TRISEbits
+                                           	extern _DDRFbits
+                                           	extern _TRISFbits
+                                           	extern _DDRGbits
+                                           	extern _TRISGbits
+                                           	extern _DDRHbits
+                                           	extern _TRISHbits
+                                           	extern _DDRJbits
+                                           	extern _TRISJbits
+                                           	extern _OSCTUNEbits
+                                           	extern _MEMCONbits
+                                           	extern _PIE1bits
+                                           	extern _PIR1bits
+                                           	extern _IPR1bits
+                                           	extern _PIE2bits
+                                           	extern _PIR2bits
+                                           	extern _IPR2bits
+                                           	extern _PIE3bits
+                                           	extern _PIR3bits
+                                           	extern _IPR3bits
+                                           	extern _EECON1bits
+                                           	extern _RCSTAbits
+                                           	extern _RCSTA1bits
+                                           	extern _TXSTAbits
+                                           	extern _TXSTA1bits
+                                           	extern _PSPCONbits
+                                           	extern _T3CONbits
+                                           	extern _CMCONbits
+                                           	extern _CVRCONbits
+                                           	extern _ECCP1ASbits
+                                           	extern _CCP3CONbits
+                                           	extern _ECCP3CONbits
+                                           	extern _CCP2CONbits
+                                           	extern _ECCP2CONbits
+                                           	extern _CCP1CONbits
+                                           	extern _ECCP1CONbits
+                                           	extern _ADCON2bits
+                                           	extern _ADCON1bits
+                                           	extern _ADCON0bits
+                                           	extern _SSP1CON2bits
+                                           	extern _SSPCON2bits
+                                           	extern _SSP1CON1bits
+                                           	extern _SSPCON1bits
+                                           	extern _SSP1STATbits
+                                           	extern _SSPSTATbits
+                                           	extern _T2CONbits
+                                           	extern _T1CONbits
+                                           	extern _RCONbits
+                                           	extern _WDTCONbits
+                                           	extern _ECON1bits
+                                           	extern _OSCCONbits
+                                           	extern _T0CONbits
+                                           	extern _STATUSbits
+                                           	extern _INTCON3bits
+                                           	extern _INTCON2bits
+                                           	extern _INTCONbits
+                                           	extern _STKPTRbits
+                                           	extern _stdin
+                                           	extern _stdout
+                                           	extern _LCDText
+                                           	extern _MAADR5
+                                           	extern _MAADR6
+                                           	extern _MAADR3
+                                           	extern _MAADR4
+                                           	extern _MAADR1
+                                           	extern _MAADR2
+                                           	extern _EBSTSD
+                                           	extern _EBSTCON
+                                           	extern _EBSTCS
+                                           	extern _EBSTCSL
+                                           	extern _EBSTCSH
+                                           	extern _MISTAT
+                                           	extern _EFLOCON
+                                           	extern _EPAUS
+                                           	extern _EPAUSL
+                                           	extern _EPAUSH
+                                           	extern _MACON1
+                                           	extern _MACON2
+                                           	extern _MACON3
+                                           	extern _MACON4
+                                           	extern _MABBIPG
+                                           	extern _MAIPG
+                                           	extern _MAIPGL
+                                           	extern _MAIPGH
+                                           	extern _MACLCON1
+                                           	extern _MACLCON2
+                                           	extern _MAMXFL
+                                           	extern _MAMXFLL
+                                           	extern _MAMXFLH
+                                           	extern _MICON
+                                           	extern _MICMD
+                                           	extern _MIREGADR
+                                           	extern _MIWR
+                                           	extern _MIWRL
+                                           	extern _MIWRH
+                                           	extern _MIRD
+                                           	extern _MIRDL
+                                           	extern _MIRDH
+                                           	extern _EHT0
+                                           	extern _EHT1
+                                           	extern _EHT2
+                                           	extern _EHT3
+                                           	extern _EHT4
+                                           	extern _EHT5
+                                           	extern _EHT6
+                                           	extern _EHT7
+                                           	extern _EPMM0
+                                           	extern _EPMM1
+                                           	extern _EPMM2
+                                           	extern _EPMM3
+                                           	extern _EPMM4
+                                           	extern _EPMM5
+                                           	extern _EPMM6
+                                           	extern _EPMM7
+                                           	extern _EPMCS
+                                           	extern _EPMCSL
+                                           	extern _EPMCSH
+                                           	extern _EPMO
+                                           	extern _EPMOL
+                                           	extern _EPMOH
+                                           	extern _EWOLIE
+                                           	extern _EWOLIR
+                                           	extern _ERXFCON
+                                           	extern _EPKTCNT
+                                           	extern _EWRPT
+                                           	extern _EWRPTL
+                                           	extern _EWRPTH
+                                           	extern _ETXST
+                                           	extern _ETXSTL
+                                           	extern _ETXSTH
+                                           	extern _ETXND
+                                           	extern _ETXNDL
+                                           	extern _ETXNDH
+                                           	extern _ERXST
+                                           	extern _ERXSTL
+                                           	extern _ERXSTH
+                                           	extern _ERXND
+                                           	extern _ERXNDL
+                                           	extern _ERXNDH
+                                           	extern _ERXRDPT
+                                           	extern _ERXRDPTL
+                                           	extern _ERXRDPTH
+                                           	extern _ERXWRPT
+                                           	extern _ERXWRPTL
+                                           	extern _ERXWRPTH
+                                           	extern _EDMAST
+                                           	extern _EDMASTL
+                                           	extern _EDMASTH
+                                           	extern _EDMAND
+                                           	extern _EDMANDL
+                                           	extern _EDMANDH
+                                           	extern _EDMADST
+                                           	extern _EDMADSTL
+                                           	extern _EDMADSTH
+                                           	extern _EDMACS
+                                           	extern _EDMACSL
+                                           	extern _EDMACSH
+                                           	extern _EIE
+                                           	extern _ESTAT
+                                           	extern _ECON2
+                                           	extern _EIR
+                                           	extern _EDATA
+                                           	extern _SSP2CON2
+                                           	extern _SSP2CON1
+                                           	extern _SSP2STAT
+                                           	extern _SSP2ADD
+                                           	extern _SSP2BUF
+                                           	extern _ECCP2DEL
+                                           	extern _ECCP2AS
+                                           	extern _ECCP3DEL
+                                           	extern _ECCP3AS
+                                           	extern _RCSTA2
+                                           	extern _TXSTA2
+                                           	extern _TXREG2
+                                           	extern _RCREG2
+                                           	extern _SPBRG2
+                                           	extern _CCP5CON
+                                           	extern _CCPR5
+                                           	extern _CCPR5L
+                                           	extern _CCPR5H
+                                           	extern _CCP4CON
+                                           	extern _CCPR4
+                                           	extern _CCPR4L
+                                           	extern _CCPR4H
+                                           	extern _T4CON
+                                           	extern _PR4
+                                           	extern _TMR4
+                                           	extern _ECCP1DEL
+                                           	extern _ERDPT
+                                           	extern _ERDPTL
+                                           	extern _ERDPTH
+                                           	extern _BAUDCON2
+                                           	extern _BAUDCTL2
+                                           	extern _SPBRGH2
+                                           	extern _BAUDCON
+                                           	extern _BAUDCON1
+                                           	extern _BAUDCTL
+                                           	extern _BAUDCTL1
+                                           	extern _SPBRGH
+                                           	extern _SPBRGH1
+                                           	extern _PORTA
+                                           	extern _PORTB
+                                           	extern _PORTC
+                                           	extern _PORTD
+                                           	extern _PORTE
+                                           	extern _PORTF
+                                           	extern _PORTG
+                                           	extern _PORTH
+                                           	extern _PORTJ
+                                           	extern _LATA
+                                           	extern _LATB
+                                           	extern _LATC
+                                           	extern _LATD
+                                           	extern _LATE
+                                           	extern _LATF
+                                           	extern _LATG
+                                           	extern _LATH
+                                           	extern _LATJ
+                                           	extern _DDRA
+                                           	extern _TRISA
+                                           	extern _DDRB
+                                           	extern _TRISB
+                                           	extern _DDRC
+                                           	extern _TRISC
+                                           	extern _DDRD
+                                           	extern _TRISD
+                                           	extern _DDRE
+                                           	extern _TRISE
+                                           	extern _DDRF
+                                           	extern _TRISF
+                                           	extern _DDRG
+                                           	extern _TRISG
+                                           	extern _DDRH
+                                           	extern _TRISH
+                                           	extern _DDRJ
+                                           	extern _TRISJ
+                                           	extern _OSCTUNE
+                                           	extern _MEMCON
+                                           	extern _PIE1
+                                           	extern _PIR1
+                                           	extern _IPR1
+                                           	extern _PIE2
+                                           	extern _PIR2
+                                           	extern _IPR2
+                                           	extern _PIE3
+                                           	extern _PIR3
+                                           	extern _IPR3
+                                           	extern _EECON1
+                                           	extern _EECON2
+                                           	extern _RCSTA
+                                           	extern _RCSTA1
+                                           	extern _TXSTA
+                                           	extern _TXSTA1
+                                           	extern _TXREG
+                                           	extern _TXREG1
+                                           	extern _RCREG
+                                           	extern _RCREG1
+                                           	extern _SPBRG
+                                           	extern _SPBRG1
+                                           	extern _PSPCON
+                                           	extern _T3CON
+                                           	extern _TMR3L
+                                           	extern _TMR3H
+                                           	extern _CMCON
+                                           	extern _CVRCON
+                                           	extern _ECCP1AS
+                                           	extern _CCP3CON
+                                           	extern _ECCP3CON
+                                           	extern _CCPR3
+                                           	extern _CCPR3L
+                                           	extern _CCPR3H
+                                           	extern _CCP2CON
+                                           	extern _ECCP2CON
+                                           	extern _CCPR2
+                                           	extern _CCPR2L
+                                           	extern _CCPR2H
+                                           	extern _CCP1CON
+                                           	extern _ECCP1CON
+                                           	extern _CCPR1
+                                           	extern _CCPR1L
+                                           	extern _CCPR1H
+                                           	extern _ADCON2
+                                           	extern _ADCON1
+                                           	extern _ADCON0
+                                           	extern _ADRES
+                                           	extern _ADRESL
+                                           	extern _ADRESH
+                                           	extern _SSP1CON2
+                                           	extern _SSPCON2
+                                           	extern _SSP1CON1
+                                           	extern _SSPCON1
+                                           	extern _SSP1STAT
+                                           	extern _SSPSTAT
+                                           	extern _SSP1ADD
+                                           	extern _SSPADD
+                                           	extern _SSP1BUF
+                                           	extern _SSPBUF
+                                           	extern _T2CON
+                                           	extern _PR2
+                                           	extern _TMR2
+                                           	extern _T1CON
+                                           	extern _TMR1L
+                                           	extern _TMR1H
+                                           	extern _RCON
+                                           	extern _WDTCON
+                                           	extern _ECON1
+                                           	extern _OSCCON
+                                           	extern _T0CON
+                                           	extern _TMR0L
+                                           	extern _TMR0H
+                                           	extern _STATUS
+                                           	extern _FSR2L
+                                           	extern _FSR2H
+                                           	extern _PLUSW2
+                                           	extern _PREINC2
+                                           	extern _POSTDEC2
+                                           	extern _POSTINC2
+                                           	extern _INDF2
+                                           	extern _BSR
+                                           	extern _FSR1L
+                                           	extern _FSR1H
+                                           	extern _PLUSW1
+                                           	extern _PREINC1
+                                           	extern _POSTDEC1
+                                           	extern _POSTINC1
+                                           	extern _INDF1
+                                           	extern _WREG
+                                           	extern _FSR0L
+                                           	extern _FSR0H
+                                           	extern _PLUSW0
+                                           	extern _PREINC0
+                                           	extern _POSTDEC0
+                                           	extern _POSTINC0
+                                           	extern _INDF0
+                                           	extern _INTCON3
+                                           	extern _INTCON2
+                                           	extern _INTCON
+                                           	extern _PROD
+                                           	extern _PRODL
+                                           	extern _PRODH
+                                           	extern _TABLAT
+                                           	extern _TBLPTR
+                                           	extern _TBLPTRL
+                                           	extern _TBLPTRH
+                                           	extern _TBLPTRU
+                                           	extern _PC
+                                           	extern _PCL
+                                           	extern _PCLATH
+                                           	extern _PCLATU
+                                           	extern _STKPTR
+                                           	extern _TOS
+                                           	extern _TOSL
+                                           	extern _TOSH
+                                           	extern _TOSU
+                                           	extern _sprintf
+                                           	extern _ultoa
+                                           	extern _strlen
+                                           	extern _LCDInit
+                                           	extern _LCDUpdate
+                                           ;--------------------------------------------------------
+                                           ;	Equates to used internal registers
+                                           ;--------------------------------------------------------
+                                           STATUS	equ	0xfd8
+                                           PCLATH	equ	0xffa
+                                           PCLATU	equ	0xffb
+                                           WREG	equ	0xfe8
+                                           BSR	equ	0xfe0
+                                           FSR0L	equ	0xfe9
+                                           FSR0H	equ	0xfea
+                                           FSR1L	equ	0xfe1
+                                           FSR2L	equ	0xfd9
+                                           INDF0	equ	0xfef
+                                           POSTDEC1	equ	0xfe5
+                                           PREINC1	equ	0xfe4
+                                           PLUSW2	equ	0xfdb
+                                           PRODL	equ	0xff3
+                                           PRODH	equ	0xff4
+                                           
+                                           
+                                           ; Internal registers
+                                           .registers	udata_ovr	0x0000
+                                           r0x00	res	1
+                                           r0x01	res	1
+                                           r0x02	res	1
+                                           r0x03	res	1
+                                           r0x04	res	1
+                                           r0x05	res	1
+                                           r0x06	res	1
+                                           r0x07	res	1
+                                           r0x08	res	1
+                                           r0x09	res	1
+                                           r0x0a	res	1
+                                           r0x0b	res	1
+                                           r0x0c	res	1
+                                           r0x0d	res	1
+                                           r0x0e	res	1
+                                           r0x0f	res	1
+                                           r0x10	res	1
+                                           r0x11	res	1
+                                           r0x12	res	1
+                                           r0x13	res	1
+                                           r0x14	res	1
+                                           r0x15	res	1
+                                           
+                                           udata_test_0	udata
+                                           _Timer0_value	res	2
+                                           
+                                           udata_test_1	udata
+                                           _displayString	res	32
+                                           
+                                           udata_test_2	udata
+                                           _DisplayWORD_WDigit_1_1	res	6
+                                           
+                                           ;--------------------------------------------------------
+                                           ; interrupt vector 
+                                           ;--------------------------------------------------------
+                                           
+                                           ;--------------------------------------------------------
+                                           ; global & static initialisations
+                                           ;--------------------------------------------------------
+                                           ; ; Starting pCode block for absolute section
+                                           ; ;-----------------------------------------
+                                           S_test_ivec_0x1_HighPriorityInterrupt	code	0X000008
+                                           ivec_0x1_HighPriorityInterrupt:
+000008   ef8d     goto	0x151a              	GOTO	_HighPriorityInterrupt
+00000a   f00a
+                                           
+                                           ; I code from now on!
+                                           ; ; Starting pCode block
+                                           S_test__main	code
+                                           _main:
+                                           ;	.line	30; test.c	InitDisplay();
+001c62   ec46     call	0x1c8c, 0           	CALL	_InitDisplay
+001c64   f00e
+                                           ;	.line	31; test.c	ConfigTimer0();
+001c66   ec7b     call	0x1cf6, 0           	CALL	_ConfigTimer0
+001c68   f00e
+                                           ;	.line	32; test.c	ConfigTimer1();
+001c6a   ec6c     call	0x1cd8, 0           	CALL	_ConfigTimer1
+001c6c   f00e
+                                           ;	.line	33; test.c	DisplayString(0, "Starting Test !");
+001c6e   0e00     movlw	0                  	MOVLW	UPPER(__str_0)
+001c70   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001c72   0e1c     movlw	0x1c               	MOVLW	HIGH(__str_0)
+001c74   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001c76   0e9e     movlw	0x9e               	MOVLW	LOW(__str_0)
+001c78   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001c7a   0e00     movlw	0                  	MOVLW	0x00
+001c7c   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001c7e   ec80     call	0x1700, 0           	CALL	_DisplayString
+001c80   f00b
+001c82   0e04     movlw	0x4                	MOVLW	0x04
+001c84   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           ;	.line	34; test.c	LaunchTest();
+001c86   ec8a     call	0x1d14, 0           	CALL	_LaunchTest
+001c88   f00e
+001c8a   0012     return	0                 	RETURN	
+                                           
+                                           ; ; Starting pCode block
+                                           S_test__strlcpy	code
+                                           _strlcpy:
+                                           ;	.line	198; test.c	strlcpy(char *dst, const char *src, size_t siz)
+000d08   cfd9     movff	0xfd9, 0xfe5       	MOVFF	FSR2L, POSTDEC1
+000d0a   ffe5
+000d0c   cfe1     movff	0xfe1, 0xfd9       	MOVFF	FSR1L, FSR2L
+000d0e   ffd9
+000d10   c000     movff	0, 0xfe5           	MOVFF	r0x00, POSTDEC1
+000d12   ffe5
+000d14   c001     movff	0x1, 0xfe5         	MOVFF	r0x01, POSTDEC1
+000d16   ffe5
+000d18   c002     movff	0x2, 0xfe5         	MOVFF	r0x02, POSTDEC1
+000d1a   ffe5
+000d1c   c003     movff	0x3, 0xfe5         	MOVFF	r0x03, POSTDEC1
+000d1e   ffe5
+000d20   c004     movff	0x4, 0xfe5         	MOVFF	r0x04, POSTDEC1
+000d22   ffe5
+000d24   c005     movff	0x5, 0xfe5         	MOVFF	r0x05, POSTDEC1
+000d26   ffe5
+000d28   c006     movff	0x6, 0xfe5         	MOVFF	r0x06, POSTDEC1
+000d2a   ffe5
+000d2c   c007     movff	0x7, 0xfe5         	MOVFF	r0x07, POSTDEC1
+000d2e   ffe5
+000d30   c008     movff	0x8, 0xfe5         	MOVFF	r0x08, POSTDEC1
+000d32   ffe5
+000d34   c009     movff	0x9, 0xfe5         	MOVFF	r0x09, POSTDEC1
+000d36   ffe5
+000d38   c00a     movff	0xa, 0xfe5         	MOVFF	r0x0a, POSTDEC1
+000d3a   ffe5
+000d3c   c00b     movff	0xb, 0xfe5         	MOVFF	r0x0b, POSTDEC1
+000d3e   ffe5
+000d40   c00c     movff	0xc, 0xfe5         	MOVFF	r0x0c, POSTDEC1
+000d42   ffe5
+000d44   c00d     movff	0xd, 0xfe5         	MOVFF	r0x0d, POSTDEC1
+000d46   ffe5
+000d48   c00e     movff	0xe, 0xfe5         	MOVFF	r0x0e, POSTDEC1
+000d4a   ffe5
+000d4c   c00f     movff	0xf, 0xfe5         	MOVFF	r0x0f, POSTDEC1
+000d4e   ffe5
+000d50   c010     movff	0x10, 0xfe5        	MOVFF	r0x10, POSTDEC1
+000d52   ffe5
+000d54   c011     movff	0x11, 0xfe5        	MOVFF	r0x11, POSTDEC1
+000d56   ffe5
+000d58   c012     movff	0x12, 0xfe5        	MOVFF	r0x12, POSTDEC1
+000d5a   ffe5
+000d5c   c013     movff	0x13, 0xfe5        	MOVFF	r0x13, POSTDEC1
+000d5e   ffe5
+000d60   c014     movff	0x14, 0xfe5        	MOVFF	r0x14, POSTDEC1
+000d62   ffe5
+000d64   c015     movff	0x15, 0xfe5        	MOVFF	r0x15, POSTDEC1
+000d66   ffe5
+000d68   0e02     movlw	0x2                	MOVLW	0x02
+000d6a   cfdb     movff	0xfdb, 0           	MOVFF	PLUSW2, r0x00
+000d6c   f000
+000d6e   0e03     movlw	0x3                	MOVLW	0x03
+000d70   cfdb     movff	0xfdb, 0x1         	MOVFF	PLUSW2, r0x01
+000d72   f001
+000d74   0e04     movlw	0x4                	MOVLW	0x04
+000d76   cfdb     movff	0xfdb, 0x2         	MOVFF	PLUSW2, r0x02
+000d78   f002
+000d7a   0e05     movlw	0x5                	MOVLW	0x05
+000d7c   cfdb     movff	0xfdb, 0x3         	MOVFF	PLUSW2, r0x03
+000d7e   f003
+000d80   0e06     movlw	0x6                	MOVLW	0x06
+000d82   cfdb     movff	0xfdb, 0x4         	MOVFF	PLUSW2, r0x04
+000d84   f004
+000d86   0e07     movlw	0x7                	MOVLW	0x07
+000d88   cfdb     movff	0xfdb, 0x5         	MOVFF	PLUSW2, r0x05
+000d8a   f005
+000d8c   0e08     movlw	0x8                	MOVLW	0x08
+000d8e   cfdb     movff	0xfdb, 0x6         	MOVFF	PLUSW2, r0x06
+000d90   f006
+000d92   0e09     movlw	0x9                	MOVLW	0x09
+000d94   cfdb     movff	0xfdb, 0x7         	MOVFF	PLUSW2, r0x07
+000d96   f007
+                                           ;	.line	200; test.c	char       *d = dst;
+000d98   c000     movff	0, 0x8             	MOVFF	r0x00, r0x08
+000d9a   f008
+000d9c   c001     movff	0x1, 0x9           	MOVFF	r0x01, r0x09
+000d9e   f009
+000da0   c002     movff	0x2, 0xa           	MOVFF	r0x02, r0x0a
+000da2   f00a
+                                           ;	.line	201; test.c	const char *s = src;
+000da4   c003     movff	0x3, 0xb           	MOVFF	r0x03, r0x0b
+000da6   f00b
+000da8   c004     movff	0x4, 0xc           	MOVFF	r0x04, r0x0c
+000daa   f00c
+000dac   c005     movff	0x5, 0xd           	MOVFF	r0x05, r0x0d
+000dae   f00d
+                                           ;	.line	202; test.c	size_t      n = siz;
+000db0   c006     movff	0x6, 0xe           	MOVFF	r0x06, r0x0e
+000db2   f00e
+000db4   c007     movff	0x7, 0xf           	MOVFF	r0x07, r0x0f
+000db6   f00f
+                                           ;	.line	205; test.c	if (n != 0)
+000db8   5006     movf	0x6, 0, 0           	MOVF	r0x06, W
+000dba   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+000dbc   b4d8     btfsc	0xd8, 0x2, 0       	BTFSC	STATUS, 2
+000dbe   d03e     bra	0xe3c                	BRA	_00171_DS_
+                                           ;	.line	207; test.c	while (--n != 0)
+000dc0   c003     movff	0x3, 0x10          	MOVFF	r0x03, r0x10
+000dc2   f010
+000dc4   c004     movff	0x4, 0x11          	MOVFF	r0x04, r0x11
+000dc6   f011
+000dc8   c005     movff	0x5, 0x12          	MOVFF	r0x05, r0x12
+000dca   f012
+000dcc   c006     movff	0x6, 0x13          	MOVFF	r0x06, r0x13
+000dce   f013
+000dd0   c007     movff	0x7, 0x14          	MOVFF	r0x07, r0x14
+000dd2   f014
+                                           _00167_DS_:
+000dd4   0eff     movlw	0xff               	MOVLW	0xff
+000dd6   2613     addwf	0x13, 0x1, 0       	ADDWF	r0x13, F
+000dd8   a0d8     btfss	0xd8, 0, 0         	BTFSS	STATUS, 0
+000dda   0614     decf	0x14, 0x1, 0        	DECF	r0x14, F
+000ddc   5013     movf	0x13, 0, 0          	MOVF	r0x13, W
+000dde   1014     iorwf	0x14, 0, 0         	IORWF	r0x14, W
+000de0   e01d     bz	0xe1c                 	BZ	_00186_DS_
+                                           ;	.line	209; test.c	if ((*d++ = *s++) == '\0')
+000de2   c010     movff	0x10, 0xfe9        	MOVFF	r0x10, FSR0L
+000de4   ffe9
+000de6   c011     movff	0x11, 0xff3        	MOVFF	r0x11, PRODL
+000de8   fff3
+000dea   5012     movf	0x12, 0, 0          	MOVF	r0x12, W
+000dec   ec5b     call	0x1cb6, 0           	CALL	__gptrget1
+000dee   f00e
+000df0   6e15     movwf	0x15, 0            	MOVWF	r0x15
+000df2   2a10     incf	0x10, 0x1, 0        	INCF	r0x10, F
+000df4   b0d8     btfsc	0xd8, 0, 0         	BTFSC	STATUS, 0
+000df6   2a11     incf	0x11, 0x1, 0        	INCF	r0x11, F
+000df8   b0d8     btfsc	0xd8, 0, 0         	BTFSC	STATUS, 0
+000dfa   2a12     incf	0x12, 0x1, 0        	INCF	r0x12, F
+000dfc   c015     movff	0x15, 0xfe5        	MOVFF	r0x15, POSTDEC1
+000dfe   ffe5
+000e00   c000     movff	0, 0xfe9           	MOVFF	r0x00, FSR0L
+000e02   ffe9
+000e04   c001     movff	0x1, 0xff3         	MOVFF	r0x01, PRODL
+000e06   fff3
+000e08   5002     movf	0x2, 0, 0           	MOVF	r0x02, W
+000e0a   ecb2     call	0x1d64, 0           	CALL	__gptrput1
+000e0c   f00e
+000e0e   2a00     incf	0, 0x1, 0           	INCF	r0x00, F
+000e10   b0d8     btfsc	0xd8, 0, 0         	BTFSC	STATUS, 0
+000e12   2a01     incf	0x1, 0x1, 0         	INCF	r0x01, F
+000e14   b0d8     btfsc	0xd8, 0, 0         	BTFSC	STATUS, 0
+000e16   2a02     incf	0x2, 0x1, 0         	INCF	r0x02, F
+000e18   5015     movf	0x15, 0, 0          	MOVF	r0x15, W
+000e1a   e1dc     bnz	0xdd4                	BNZ	_00167_DS_
+                                           _00186_DS_:
+                                           ;	.line	210; test.c	break;
+000e1c   c010     movff	0x10, 0xb          	MOVFF	r0x10, r0x0b
+000e1e   f00b
+000e20   c011     movff	0x11, 0xc          	MOVFF	r0x11, r0x0c
+000e22   f00c
+000e24   c012     movff	0x12, 0xd          	MOVFF	r0x12, r0x0d
+000e26   f00d
+000e28   c000     movff	0, 0x8             	MOVFF	r0x00, r0x08
+000e2a   f008
+000e2c   c001     movff	0x1, 0x9           	MOVFF	r0x01, r0x09
+000e2e   f009
+000e30   c002     movff	0x2, 0xa           	MOVFF	r0x02, r0x0a
+000e32   f00a
+000e34   c013     movff	0x13, 0xe          	MOVFF	r0x13, r0x0e
+000e36   f00e
+000e38   c014     movff	0x14, 0xf          	MOVFF	r0x14, r0x0f
+000e3a   f00f
+                                           _00171_DS_:
+                                           ;	.line	215; test.c	if (n == 0)
+000e3c   500e     movf	0xe, 0, 0           	MOVF	r0x0e, W
+000e3e   100f     iorwf	0xf, 0, 0          	IORWF	r0x0f, W
+000e40   e127     bnz	0xe90                	BNZ	_00178_DS_
+                                           ;	.line	217; test.c	if (siz != 0)
+000e42   5006     movf	0x6, 0, 0           	MOVF	r0x06, W
+000e44   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+000e46   e009     bz	0xe5a                 	BZ	_00185_DS_
+                                           ;	.line	218; test.c	*d = '\0';          /* NUL-terminate dst */
+000e48   0e00     movlw	0                  	MOVLW	0x00
+000e4a   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000e4c   c008     movff	0x8, 0xfe9         	MOVFF	r0x08, FSR0L
+000e4e   ffe9
+000e50   c009     movff	0x9, 0xff3         	MOVFF	r0x09, PRODL
+000e52   fff3
+000e54   500a     movf	0xa, 0, 0           	MOVF	r0x0a, W
+000e56   ecb2     call	0x1d64, 0           	CALL	__gptrput1
+000e58   f00e
+                                           _00185_DS_:
+                                           ;	.line	219; test.c	while (*s++)
+000e5a   c00b     movff	0xb, 0             	MOVFF	r0x0b, r0x00
+000e5c   f000
+000e5e   c00c     movff	0xc, 0x1           	MOVFF	r0x0c, r0x01
+000e60   f001
+000e62   c00d     movff	0xd, 0x2           	MOVFF	r0x0d, r0x02
+000e64   f002
+                                           _00174_DS_:
+000e66   c000     movff	0, 0xfe9           	MOVFF	r0x00, FSR0L
+000e68   ffe9
+000e6a   c001     movff	0x1, 0xff3         	MOVFF	r0x01, PRODL
+000e6c   fff3
+000e6e   5002     movf	0x2, 0, 0           	MOVF	r0x02, W
+000e70   ec5b     call	0x1cb6, 0           	CALL	__gptrget1
+000e72   f00e
+000e74   6e06     movwf	0x6, 0             	MOVWF	r0x06
+000e76   2a00     incf	0, 0x1, 0           	INCF	r0x00, F
+000e78   b0d8     btfsc	0xd8, 0, 0         	BTFSC	STATUS, 0
+000e7a   2a01     incf	0x1, 0x1, 0         	INCF	r0x01, F
+000e7c   b0d8     btfsc	0xd8, 0, 0         	BTFSC	STATUS, 0
+000e7e   2a02     incf	0x2, 0x1, 0         	INCF	r0x02, F
+000e80   5006     movf	0x6, 0, 0           	MOVF	r0x06, W
+000e82   e1f1     bnz	0xe66                	BNZ	_00174_DS_
+000e84   c000     movff	0, 0xb             	MOVFF	r0x00, r0x0b
+000e86   f00b
+000e88   c001     movff	0x1, 0xc           	MOVFF	r0x01, r0x0c
+000e8a   f00c
+000e8c   c002     movff	0x2, 0xd           	MOVFF	r0x02, r0x0d
+000e8e   f00d
+                                           _00178_DS_:
+                                           ;	.line	223; test.c	return (s - src - 1);       /* count does not include NUL */
+000e90   5003     movf	0x3, 0, 0           	MOVF	r0x03, W
+000e92   5c0b     subwf	0xb, 0, 0          	SUBWF	r0x0b, W
+000e94   6e03     movwf	0x3, 0             	MOVWF	r0x03
+000e96   5004     movf	0x4, 0, 0           	MOVF	r0x04, W
+000e98   580c     subwfb	0xc, 0, 0         	SUBWFB	r0x0c, W
+000e9a   6e04     movwf	0x4, 0             	MOVWF	r0x04
+000e9c   0eff     movlw	0xff               	MOVLW	0xff
+000e9e   2603     addwf	0x3, 0x1, 0        	ADDWF	r0x03, F
+000ea0   a0d8     btfss	0xd8, 0, 0         	BTFSS	STATUS, 0
+000ea2   0604     decf	0x4, 0x1, 0         	DECF	r0x04, F
+000ea4   c004     movff	0x4, 0xff3         	MOVFF	r0x04, PRODL
+000ea6   fff3
+000ea8   5003     movf	0x3, 0, 0           	MOVF	r0x03, W
+000eaa   cfe4     movff	0xfe4, 0x15        	MOVFF	PREINC1, r0x15
+000eac   f015
+000eae   cfe4     movff	0xfe4, 0x14        	MOVFF	PREINC1, r0x14
+000eb0   f014
+000eb2   cfe4     movff	0xfe4, 0x13        	MOVFF	PREINC1, r0x13
+000eb4   f013
+000eb6   cfe4     movff	0xfe4, 0x12        	MOVFF	PREINC1, r0x12
+000eb8   f012
+000eba   cfe4     movff	0xfe4, 0x11        	MOVFF	PREINC1, r0x11
+000ebc   f011
+000ebe   cfe4     movff	0xfe4, 0x10        	MOVFF	PREINC1, r0x10
+000ec0   f010
+000ec2   cfe4     movff	0xfe4, 0xf         	MOVFF	PREINC1, r0x0f
+000ec4   f00f
+000ec6   cfe4     movff	0xfe4, 0xe         	MOVFF	PREINC1, r0x0e
+000ec8   f00e
+000eca   cfe4     movff	0xfe4, 0xd         	MOVFF	PREINC1, r0x0d
+000ecc   f00d
+000ece   cfe4     movff	0xfe4, 0xc         	MOVFF	PREINC1, r0x0c
+000ed0   f00c
+000ed2   cfe4     movff	0xfe4, 0xb         	MOVFF	PREINC1, r0x0b
+000ed4   f00b
+000ed6   cfe4     movff	0xfe4, 0xa         	MOVFF	PREINC1, r0x0a
+000ed8   f00a
+000eda   cfe4     movff	0xfe4, 0x9         	MOVFF	PREINC1, r0x09
+000edc   f009
+000ede   cfe4     movff	0xfe4, 0x8         	MOVFF	PREINC1, r0x08
+000ee0   f008
+000ee2   cfe4     movff	0xfe4, 0x7         	MOVFF	PREINC1, r0x07
+000ee4   f007
+000ee6   cfe4     movff	0xfe4, 0x6         	MOVFF	PREINC1, r0x06
+000ee8   f006
+000eea   cfe4     movff	0xfe4, 0x5         	MOVFF	PREINC1, r0x05
+000eec   f005
+000eee   cfe4     movff	0xfe4, 0x4         	MOVFF	PREINC1, r0x04
+000ef0   f004
+000ef2   cfe4     movff	0xfe4, 0x3         	MOVFF	PREINC1, r0x03
+000ef4   f003
+000ef6   cfe4     movff	0xfe4, 0x2         	MOVFF	PREINC1, r0x02
+000ef8   f002
+000efa   cfe4     movff	0xfe4, 0x1         	MOVFF	PREINC1, r0x01
+000efc   f001
+000efe   cfe4     movff	0xfe4, 0           	MOVFF	PREINC1, r0x00
+000f00   f000
+000f02   cfe4     movff	0xfe4, 0xfd9       	MOVFF	PREINC1, FSR2L
+000f04   ffd9
+000f06   0012     return	0                 	RETURN	
+                                           
+                                           ; ; Starting pCode block
+                                           S_test__DisplayString	code
+                                           _DisplayString:
+                                           ;	.line	152; test.c	void DisplayString(BYTE pos, char* text)
+001700   cfd9     movff	0xfd9, 0xfe5       	MOVFF	FSR2L, POSTDEC1
+001702   ffe5
+001704   cfe1     movff	0xfe1, 0xfd9       	MOVFF	FSR1L, FSR2L
+001706   ffd9
+001708   c000     movff	0, 0xfe5           	MOVFF	r0x00, POSTDEC1
+00170a   ffe5
+00170c   c001     movff	0x1, 0xfe5         	MOVFF	r0x01, POSTDEC1
+00170e   ffe5
+001710   c002     movff	0x2, 0xfe5         	MOVFF	r0x02, POSTDEC1
+001712   ffe5
+001714   c003     movff	0x3, 0xfe5         	MOVFF	r0x03, POSTDEC1
+001716   ffe5
+001718   c004     movff	0x4, 0xfe5         	MOVFF	r0x04, POSTDEC1
+00171a   ffe5
+00171c   c005     movff	0x5, 0xfe5         	MOVFF	r0x05, POSTDEC1
+00171e   ffe5
+001720   c006     movff	0x6, 0xfe5         	MOVFF	r0x06, POSTDEC1
+001722   ffe5
+001724   c007     movff	0x7, 0xfe5         	MOVFF	r0x07, POSTDEC1
+001726   ffe5
+001728   0e02     movlw	0x2                	MOVLW	0x02
+00172a   cfdb     movff	0xfdb, 0           	MOVFF	PLUSW2, r0x00
+00172c   f000
+00172e   0e03     movlw	0x3                	MOVLW	0x03
+001730   cfdb     movff	0xfdb, 0x1         	MOVFF	PLUSW2, r0x01
+001732   f001
+001734   0e04     movlw	0x4                	MOVLW	0x04
+001736   cfdb     movff	0xfdb, 0x2         	MOVFF	PLUSW2, r0x02
+001738   f002
+00173a   0e05     movlw	0x5                	MOVLW	0x05
+00173c   cfdb     movff	0xfdb, 0x3         	MOVFF	PLUSW2, r0x03
+00173e   f003
+                                           ;	.line	154; test.c	BYTE l= strlen(text)+1;
+001740   5003     movf	0x3, 0, 0           	MOVF	r0x03, W
+001742   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001744   5002     movf	0x2, 0, 0           	MOVF	r0x02, W
+001746   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001748   5001     movf	0x1, 0, 0           	MOVF	r0x01, W
+00174a   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+00174c   ec58     call	0x1ab0, 0           	CALL	_strlen
+00174e   f00d
+001750   6e04     movwf	0x4, 0             	MOVWF	r0x04
+001752   cff3     movff	0xff3, 0x5         	MOVFF	PRODL, r0x05
+001754   f005
+001756   0e03     movlw	0x3                	MOVLW	0x03
+001758   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+00175a   2a04     incf	0x4, 0x1, 0         	INCF	r0x04, F
+                                           ;	.line	155; test.c	BYTE max= 32-pos;
+00175c   5000     movf	0, 0, 0             	MOVF	r0x00, W
+00175e   0820     sublw	0x20               	SUBLW	0x20
+001760   6e05     movwf	0x5, 0             	MOVWF	r0x05
+                                           ;	.line	156; test.c	strlcpy((char*)&LCDText[pos], text,(l<max)?l:max );
+001762   6a06     clrf	0x6, 0              	CLRF	r0x06
+001764   0e00     movlw	0                  	MOVLW	LOW(_LCDText)
+001766   2600     addwf	0, 0x1, 0          	ADDWF	r0x00, F
+001768   0e0f     movlw	0xf                	MOVLW	HIGH(_LCDText)
+00176a   2206     addwfc	0x6, 0x1, 0       	ADDWFC	r0x06, F
+00176c   5006     movf	0x6, 0, 0           	MOVF	r0x06, W
+00176e   6e06     movwf	0x6, 0             	MOVWF	r0x06
+001770   5000     movf	0, 0, 0             	MOVF	r0x00, W
+001772   6e00     movwf	0, 0               	MOVWF	r0x00
+001774   0e80     movlw	0x80               	MOVLW	0x80
+001776   6e07     movwf	0x7, 0             	MOVWF	r0x07
+001778   5005     movf	0x5, 0, 0           	MOVF	r0x05, W
+00177a   5c04     subwf	0x4, 0, 0          	SUBWF	r0x04, W
+00177c   e302     bnc	0x1782               	BNC	_00158_DS_
+00177e   c005     movff	0x5, 0x4           	MOVFF	r0x05, r0x04
+001780   f004
+                                           _00158_DS_:
+001782   6a05     clrf	0x5, 0              	CLRF	r0x05
+001784   5005     movf	0x5, 0, 0           	MOVF	r0x05, W
+001786   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001788   5004     movf	0x4, 0, 0           	MOVF	r0x04, W
+00178a   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+00178c   5003     movf	0x3, 0, 0           	MOVF	r0x03, W
+00178e   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001790   5002     movf	0x2, 0, 0           	MOVF	r0x02, W
+001792   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001794   5001     movf	0x1, 0, 0           	MOVF	r0x01, W
+001796   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001798   5007     movf	0x7, 0, 0           	MOVF	r0x07, W
+00179a   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+00179c   5006     movf	0x6, 0, 0           	MOVF	r0x06, W
+00179e   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0017a0   5000     movf	0, 0, 0             	MOVF	r0x00, W
+0017a2   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0017a4   ec84     call	0xd08, 0            	CALL	_strlcpy
+0017a6   f006
+0017a8   0e08     movlw	0x8                	MOVLW	0x08
+0017aa   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           ;	.line	157; test.c	LCDUpdate();
+0017ac   ec21     call	0x842, 0            	CALL	_LCDUpdate
+0017ae   f004
+0017b0   cfe4     movff	0xfe4, 0x7         	MOVFF	PREINC1, r0x07
+0017b2   f007
+0017b4   cfe4     movff	0xfe4, 0x6         	MOVFF	PREINC1, r0x06
+0017b6   f006
+0017b8   cfe4     movff	0xfe4, 0x5         	MOVFF	PREINC1, r0x05
+0017ba   f005
+0017bc   cfe4     movff	0xfe4, 0x4         	MOVFF	PREINC1, r0x04
+0017be   f004
+0017c0   cfe4     movff	0xfe4, 0x3         	MOVFF	PREINC1, r0x03
+0017c2   f003
+0017c4   cfe4     movff	0xfe4, 0x2         	MOVFF	PREINC1, r0x02
+0017c6   f002
+0017c8   cfe4     movff	0xfe4, 0x1         	MOVFF	PREINC1, r0x01
+0017ca   f001
+0017cc   cfe4     movff	0xfe4, 0           	MOVFF	PREINC1, r0x00
+0017ce   f000
+0017d0   cfe4     movff	0xfe4, 0xfd9       	MOVFF	PREINC1, FSR2L
+0017d2   ffd9
+0017d4   0012     return	0                 	RETURN	
+                                           
+                                           ; ; Starting pCode block
+                                           S_test__DisplayWORD	code
+                                           _DisplayWORD:
+                                           ;	.line	130; test.c	void DisplayWORD(BYTE pos, WORD w) //WORD is a 16 bits unsigned
+0011e4   cfd9     movff	0xfd9, 0xfe5       	MOVFF	FSR2L, POSTDEC1
+0011e6   ffe5
+0011e8   cfe1     movff	0xfe1, 0xfd9       	MOVFF	FSR1L, FSR2L
+0011ea   ffd9
+0011ec   c000     movff	0, 0xfe5           	MOVFF	r0x00, POSTDEC1
+0011ee   ffe5
+0011f0   c001     movff	0x1, 0xfe5         	MOVFF	r0x01, POSTDEC1
+0011f2   ffe5
+0011f4   c002     movff	0x2, 0xfe5         	MOVFF	r0x02, POSTDEC1
+0011f6   ffe5
+0011f8   c003     movff	0x3, 0xfe5         	MOVFF	r0x03, POSTDEC1
+0011fa   ffe5
+0011fc   c004     movff	0x4, 0xfe5         	MOVFF	r0x04, POSTDEC1
+0011fe   ffe5
+001200   c005     movff	0x5, 0xfe5         	MOVFF	r0x05, POSTDEC1
+001202   ffe5
+001204   0e02     movlw	0x2                	MOVLW	0x02
+001206   cfdb     movff	0xfdb, 0           	MOVFF	PLUSW2, r0x00
+001208   f000
+00120a   0e03     movlw	0x3                	MOVLW	0x03
+00120c   cfdb     movff	0xfdb, 0x1         	MOVFF	PLUSW2, r0x01
+00120e   f001
+001210   0e04     movlw	0x4                	MOVLW	0x04
+001212   cfdb     movff	0xfdb, 0x2         	MOVFF	PLUSW2, r0x02
+001214   f002
+                                           ;	.line	138; test.c	ultoa(w, WDigit, radix);      
+001216   6a03     clrf	0x3, 0              	CLRF	r0x03
+001218   6a04     clrf	0x4, 0              	CLRF	r0x04
+00121a   0e0a     movlw	0xa                	MOVLW	0x0a
+00121c   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+00121e   0e0f     movlw	0xf                	MOVLW	HIGH(_DisplayWORD_WDigit_1_1)
+001220   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001222   0e4e     movlw	0x4e               	MOVLW	LOW(_DisplayWORD_WDigit_1_1)
+001224   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001226   5004     movf	0x4, 0, 0           	MOVF	r0x04, W
+001228   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+00122a   5003     movf	0x3, 0, 0           	MOVF	r0x03, W
+00122c   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+00122e   5002     movf	0x2, 0, 0           	MOVF	r0x02, W
+001230   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001232   5001     movf	0x1, 0, 0           	MOVF	r0x01, W
+001234   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001236   ec84     call	0xf08, 0            	CALL	_ultoa
+001238   f007
+00123a   0e07     movlw	0x7                	MOVLW	0x07
+00123c   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           ;	.line	139; test.c	for(j = 0; j < strlen((char*)WDigit); j++)
+00123e   6a01     clrf	0x1, 0              	CLRF	r0x01
+                                           _00139_DS_:
+001240   0e0f     movlw	0xf                	MOVLW	HIGH(_DisplayWORD_WDigit_1_1)
+001242   6e03     movwf	0x3, 0             	MOVWF	r0x03
+001244   0e4e     movlw	0x4e               	MOVLW	LOW(_DisplayWORD_WDigit_1_1)
+001246   6e02     movwf	0x2, 0             	MOVWF	r0x02
+001248   0e80     movlw	0x80               	MOVLW	0x80
+00124a   6e04     movwf	0x4, 0             	MOVWF	r0x04
+00124c   5004     movf	0x4, 0, 0           	MOVF	r0x04, W
+00124e   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001250   5003     movf	0x3, 0, 0           	MOVF	r0x03, W
+001252   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001254   5002     movf	0x2, 0, 0           	MOVF	r0x02, W
+001256   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001258   ec58     call	0x1ab0, 0           	CALL	_strlen
+00125a   f00d
+00125c   6e02     movwf	0x2, 0             	MOVWF	r0x02
+00125e   cff3     movff	0xff3, 0x3         	MOVFF	PRODL, r0x03
+001260   f003
+001262   0e03     movlw	0x3                	MOVLW	0x03
+001264   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+001266   c001     movff	0x1, 0x4           	MOVFF	r0x01, r0x04
+001268   f004
+00126a   6a05     clrf	0x5, 0              	CLRF	r0x05
+00126c   5005     movf	0x5, 0, 0           	MOVF	r0x05, W
+00126e   0f80     addlw	0x80               	ADDLW	0x80
+001270   6ef3     movwf	0xf3, 0            	MOVWF	PRODL
+001272   5003     movf	0x3, 0, 0           	MOVF	r0x03, W
+001274   0f80     addlw	0x80               	ADDLW	0x80
+001276   5cf3     subwf	0xf3, 0, 0         	SUBWF	PRODL, W
+001278   e102     bnz	0x127e               	BNZ	_00149_DS_
+00127a   5002     movf	0x2, 0, 0           	MOVF	r0x02, W
+00127c   5c04     subwf	0x4, 0, 0          	SUBWF	r0x04, W
+                                           _00149_DS_:
+00127e   e21c     bc	0x12b8                	BC	_00142_DS_
+                                           ;	.line	141; test.c	LCDText[LCDPos++] = WDigit[j];
+001280   c000     movff	0, 0x2             	MOVFF	r0x00, r0x02
+001282   f002
+001284   2a00     incf	0, 0x1, 0           	INCF	r0x00, F
+001286   6a03     clrf	0x3, 0              	CLRF	r0x03
+001288   0e00     movlw	0                  	MOVLW	LOW(_LCDText)
+00128a   2602     addwf	0x2, 0x1, 0        	ADDWF	r0x02, F
+00128c   0e0f     movlw	0xf                	MOVLW	HIGH(_LCDText)
+00128e   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+001290   0e4e     movlw	0x4e               	MOVLW	LOW(_DisplayWORD_WDigit_1_1)
+001292   2401     addwf	0x1, 0, 0          	ADDWF	r0x01, W
+001294   6e04     movwf	0x4, 0             	MOVWF	r0x04
+001296   6a05     clrf	0x5, 0              	CLRF	r0x05
+001298   0e0f     movlw	0xf                	MOVLW	HIGH(_DisplayWORD_WDigit_1_1)
+00129a   2205     addwfc	0x5, 0x1, 0       	ADDWFC	r0x05, F
+00129c   c004     movff	0x4, 0xfe9         	MOVFF	r0x04, FSR0L
+00129e   ffe9
+0012a0   c005     movff	0x5, 0xfea         	MOVFF	r0x05, FSR0H
+0012a2   ffea
+0012a4   cfef     movff	0xfef, 0x4         	MOVFF	INDF0, r0x04
+0012a6   f004
+0012a8   c002     movff	0x2, 0xfe9         	MOVFF	r0x02, FSR0L
+0012aa   ffe9
+0012ac   c003     movff	0x3, 0xfea         	MOVFF	r0x03, FSR0H
+0012ae   ffea
+0012b0   c004     movff	0x4, 0xfef         	MOVFF	r0x04, INDF0
+0012b2   ffef
+                                           ;	.line	139; test.c	for(j = 0; j < strlen((char*)WDigit); j++)
+0012b4   2a01     incf	0x1, 0x1, 0         	INCF	r0x01, F
+0012b6   d7c4     bra	0x1240               	BRA	_00139_DS_
+                                           _00142_DS_:
+                                           ;	.line	143; test.c	if(LCDPos < 32u)
+0012b8   c000     movff	0, 0x1             	MOVFF	r0x00, r0x01
+0012ba   f001
+0012bc   6a02     clrf	0x2, 0              	CLRF	r0x02
+0012be   0e00     movlw	0                  	MOVLW	0x00
+0012c0   5c02     subwf	0x2, 0, 0          	SUBWF	r0x02, W
+0012c2   e102     bnz	0x12c8               	BNZ	_00150_DS_
+0012c4   0e20     movlw	0x20               	MOVLW	0x20
+0012c6   5c01     subwf	0x1, 0, 0          	SUBWF	r0x01, W
+                                           _00150_DS_:
+0012c8   e20b     bc	0x12e0                	BC	_00138_DS_
+                                           ;	.line	144; test.c	LCDText[LCDPos] = 0;
+0012ca   6a01     clrf	0x1, 0              	CLRF	r0x01
+0012cc   0e00     movlw	0                  	MOVLW	LOW(_LCDText)
+0012ce   2600     addwf	0, 0x1, 0          	ADDWF	r0x00, F
+0012d0   0e0f     movlw	0xf                	MOVLW	HIGH(_LCDText)
+0012d2   2201     addwfc	0x1, 0x1, 0       	ADDWFC	r0x01, F
+0012d4   c000     movff	0, 0xfe9           	MOVFF	r0x00, FSR0L
+0012d6   ffe9
+0012d8   c001     movff	0x1, 0xfea         	MOVFF	r0x01, FSR0H
+0012da   ffea
+0012dc   0e00     movlw	0                  	MOVLW	0x00
+0012de   6eef     movwf	0xef, 0            	MOVWF	INDF0
+                                           _00138_DS_:
+                                           ;	.line	145; test.c	LCDUpdate();
+0012e0   ec21     call	0x842, 0            	CALL	_LCDUpdate
+0012e2   f004
+0012e4   cfe4     movff	0xfe4, 0x5         	MOVFF	PREINC1, r0x05
+0012e6   f005
+0012e8   cfe4     movff	0xfe4, 0x4         	MOVFF	PREINC1, r0x04
+0012ea   f004
+0012ec   cfe4     movff	0xfe4, 0x3         	MOVFF	PREINC1, r0x03
+0012ee   f003
+0012f0   cfe4     movff	0xfe4, 0x2         	MOVFF	PREINC1, r0x02
+0012f2   f002
+0012f4   cfe4     movff	0xfe4, 0x1         	MOVFF	PREINC1, r0x01
+0012f6   f001
+0012f8   cfe4     movff	0xfe4, 0           	MOVFF	PREINC1, r0x00
+0012fa   f000
+0012fc   cfe4     movff	0xfe4, 0xfd9       	MOVFF	PREINC1, FSR2L
+0012fe   ffd9
+001300   0012     return	0                 	RETURN	
+                                           
+                                           ; ; Starting pCode block
+                                           S_test__HighPriorityInterrupt	code
+                                           _HighPriorityInterrupt:
+                                           ;	.line	105; test.c	void HighPriorityInterrupt(void) interrupt 1
+00151a   cfe8     movff	0xfe8, 0xfe5       	MOVFF	WREG, POSTDEC1
+00151c   ffe5
+00151e   cfd8     movff	0xfd8, 0xfe5       	MOVFF	STATUS, POSTDEC1
+001520   ffe5
+001522   cfe0     movff	0xfe0, 0xfe5       	MOVFF	BSR, POSTDEC1
+001524   ffe5
+001526   cff3     movff	0xff3, 0xfe5       	MOVFF	PRODL, POSTDEC1
+001528   ffe5
+00152a   cff4     movff	0xff4, 0xfe5       	MOVFF	PRODH, POSTDEC1
+00152c   ffe5
+00152e   cfe9     movff	0xfe9, 0xfe5       	MOVFF	FSR0L, POSTDEC1
+001530   ffe5
+001532   cfea     movff	0xfea, 0xfe5       	MOVFF	FSR0H, POSTDEC1
+001534   ffe5
+001536   cffa     movff	0xffa, 0xfe5       	MOVFF	PCLATH, POSTDEC1
+001538   ffe5
+00153a   cffb     movff	0xffb, 0xfe5       	MOVFF	PCLATU, POSTDEC1
+00153c   ffe5
+00153e   cfd9     movff	0xfd9, 0xfe5       	MOVFF	FSR2L, POSTDEC1
+001540   ffe5
+001542   cfe1     movff	0xfe1, 0xfd9       	MOVFF	FSR1L, FSR2L
+001544   ffd9
+001546   c000     movff	0, 0xfe5           	MOVFF	r0x00, POSTDEC1
+001548   ffe5
+00154a   c001     movff	0x1, 0xfe5         	MOVFF	r0x01, POSTDEC1
+00154c   ffe5
+00154e   c002     movff	0x2, 0xfe5         	MOVFF	r0x02, POSTDEC1
+001550   ffe5
+001552   c003     movff	0x3, 0xfe5         	MOVFF	r0x03, POSTDEC1
+001554   ffe5
+                                           ;	.line	107; test.c	Timer0_value = (TMR0H << 8) + TMR0L; // get counted value from Timer0
+001556   cfd7     movff	0xfd7, 0           	MOVFF	_TMR0H, r0x00
+001558   f000
+00155a   6a01     clrf	0x1, 0              	CLRF	r0x01
+00155c   5000     movf	0, 0, 0             	MOVF	r0x00, W
+00155e   6e03     movwf	0x3, 0             	MOVWF	r0x03
+001560   6a02     clrf	0x2, 0              	CLRF	r0x02
+001562   cfd6     movff	0xfd6, 0           	MOVFF	_TMR0L, r0x00
+001564   f000
+001566   6a01     clrf	0x1, 0              	CLRF	r0x01
+001568   5000     movf	0, 0, 0             	MOVF	r0x00, W
+00156a   2402     addwf	0x2, 0, 0          	ADDWF	r0x02, W
+00156c   010f     movlb	0xf                	BANKSEL	_Timer0_value
+00156e   6f57     movwf	0x57, 0x1          	MOVWF	_Timer0_value, B
+001570   5001     movf	0x1, 0, 0           	MOVF	r0x01, W
+001572   2003     addwfc	0x3, 0, 0         	ADDWFC	r0x03, W
+001574   010f     movlb	0xf                	BANKSEL	(_Timer0_value + 1)
+001576   6f58     movwf	0x58, 0x1          	MOVWF	(_Timer0_value + 1), B
+                                           ;	.line	110; test.c	if (PIR1bits.TMR1IF) //Check flag of Timer1 interrupt 
+001578   a09e     btfss	0x9e, 0, 0         	BTFSS	_PIR1bits, 0
+00157a   d030     bra	0x15dc               	BRA	_00132_DS_
+                                           ;	.line	112; test.c	T0CONbits.TMR0ON = 0; // Stops Timer0
+00157c   9ed5     bcf	0xd5, 0x7, 0         	BCF	_T0CONbits, 7
+                                           ;	.line	113; test.c	T1CONbits.TMR1ON = 0; // Stops Timer1
+00157e   90cd     bcf	0xcd, 0, 0           	BCF	_T1CONbits, 0
+                                           ;	.line	115; test.c	sprintf(displayString, "Val: %u",Timer0_value);
+001580   0e0f     movlw	0xf                	MOVLW	HIGH(_displayString)
+001582   6e01     movwf	0x1, 0             	MOVWF	r0x01
+001584   0e21     movlw	0x21               	MOVLW	LOW(_displayString)
+001586   6e00     movwf	0, 0               	MOVWF	r0x00
+001588   0e80     movlw	0x80               	MOVLW	0x80
+00158a   6e02     movwf	0x2, 0             	MOVWF	r0x02
+00158c   010f     movlb	0xf                	BANKSEL	(_Timer0_value + 1)
+00158e   5158     movf	0x58, 0, 0x1        	MOVF	(_Timer0_value + 1), W, B
+001590   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001592   010f     movlb	0xf                	BANKSEL	_Timer0_value
+001594   5157     movf	0x57, 0, 0x1        	MOVF	_Timer0_value, W, B
+001596   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001598   0e00     movlw	0                  	MOVLW	UPPER(__str_1)
+00159a   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+00159c   0e1c     movlw	0x1c               	MOVLW	HIGH(__str_1)
+00159e   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0015a0   0eae     movlw	0xae               	MOVLW	LOW(__str_1)
+0015a2   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0015a4   5002     movf	0x2, 0, 0           	MOVF	r0x02, W
+0015a6   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0015a8   5001     movf	0x1, 0, 0           	MOVF	r0x01, W
+0015aa   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0015ac   5000     movf	0, 0, 0             	MOVF	r0x00, W
+0015ae   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0015b0   ec0b     call	0x1616, 0           	CALL	_sprintf
+0015b2   f00b
+0015b4   0e08     movlw	0x8                	MOVLW	0x08
+0015b6   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           ;	.line	116; test.c	DisplayString(0,displayString);
+0015b8   0e0f     movlw	0xf                	MOVLW	HIGH(_displayString)
+0015ba   6e01     movwf	0x1, 0             	MOVWF	r0x01
+0015bc   0e21     movlw	0x21               	MOVLW	LOW(_displayString)
+0015be   6e00     movwf	0, 0               	MOVWF	r0x00
+0015c0   0e80     movlw	0x80               	MOVLW	0x80
+0015c2   6e02     movwf	0x2, 0             	MOVWF	r0x02
+0015c4   5002     movf	0x2, 0, 0           	MOVF	r0x02, W
+0015c6   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0015c8   5001     movf	0x1, 0, 0           	MOVF	r0x01, W
+0015ca   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0015cc   5000     movf	0, 0, 0             	MOVF	r0x00, W
+0015ce   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0015d0   0e00     movlw	0                  	MOVLW	0x00
+0015d2   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0015d4   ec80     call	0x1700, 0           	CALL	_DisplayString
+0015d6   f00b
+0015d8   0e04     movlw	0x4                	MOVLW	0x04
+0015da   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           _00132_DS_:
+0015dc   cfe4     movff	0xfe4, 0x3         	MOVFF	PREINC1, r0x03
+0015de   f003
+0015e0   cfe4     movff	0xfe4, 0x2         	MOVFF	PREINC1, r0x02
+0015e2   f002
+0015e4   cfe4     movff	0xfe4, 0x1         	MOVFF	PREINC1, r0x01
+0015e6   f001
+0015e8   cfe4     movff	0xfe4, 0           	MOVFF	PREINC1, r0x00
+0015ea   f000
+0015ec   cfe4     movff	0xfe4, 0xfd9       	MOVFF	PREINC1, FSR2L
+0015ee   ffd9
+0015f0   cfe4     movff	0xfe4, 0xffb       	MOVFF	PREINC1, PCLATU
+0015f2   fffb
+0015f4   cfe4     movff	0xfe4, 0xffa       	MOVFF	PREINC1, PCLATH
+0015f6   fffa
+0015f8   cfe4     movff	0xfe4, 0xfea       	MOVFF	PREINC1, FSR0H
+0015fa   ffea
+0015fc   cfe4     movff	0xfe4, 0xfe9       	MOVFF	PREINC1, FSR0L
+0015fe   ffe9
+001600   cfe4     movff	0xfe4, 0xff4       	MOVFF	PREINC1, PRODH
+001602   fff4
+001604   cfe4     movff	0xfe4, 0xff3       	MOVFF	PREINC1, PRODL
+001606   fff3
+001608   cfe4     movff	0xfe4, 0xfe0       	MOVFF	PREINC1, BSR
+00160a   ffe0
+00160c   cfe4     movff	0xfe4, 0xfd8       	MOVFF	PREINC1, STATUS
+00160e   ffd8
+001610   cfe4     movff	0xfe4, 0xfe8       	MOVFF	PREINC1, WREG
+001612   ffe8
+001614   0010     retfie	0                 	RETFIE	
+                                           
+                                           ; ; Starting pCode block
+                                           S_test__LaunchTest	code
+                                           _LaunchTest:
+                                           ;	.line	90; test.c	void LaunchTest(){
+001d14   cfd9     movff	0xfd9, 0xfe5       	MOVFF	FSR2L, POSTDEC1
+001d16   ffe5
+001d18   cfe1     movff	0xfe1, 0xfd9       	MOVFF	FSR1L, FSR2L
+001d1a   ffd9
+                                           ;	.line	91; test.c	INTCONbits.GIE = 1; // Global interrupt enable
+001d1c   8ef2     bsf	0xf2, 0x7, 0         	BSF	_INTCONbits, 7
+                                           ;	.line	92; test.c	RCONbits.IPEN = 1; //interrupts priority enable
+001d1e   8ed0     bsf	0xd0, 0x7, 0         	BSF	_RCONbits, 7
+                                           ;	.line	94; test.c	PIE1bits.TMR1IE = 1; //enable timer1 interrupt
+001d20   809d     bsf	0x9d, 0, 0           	BSF	_PIE1bits, 0
+                                           ;	.line	95; test.c	IPR1bits.TMR1IP	= 1; //timer1 interrupt set to high priority
+001d22   809f     bsf	0x9f, 0, 0           	BSF	_IPR1bits, 0
+                                           ;	.line	96; test.c	PIR1bits.TMR1IF = 0; //clear timer1 flag bit
+001d24   909e     bcf	0x9e, 0, 0           	BCF	_PIR1bits, 0
+                                           ;	.line	98; test.c	T1CONbits.TMR1ON = 1; // Start timer1
+001d26   80cd     bsf	0xcd, 0, 0           	BSF	_T1CONbits, 0
+                                           ;	.line	99; test.c	T0CONbits.TMR0ON = 1; // Start timer0
+001d28   8ed5     bsf	0xd5, 0x7, 0         	BSF	_T0CONbits, 7
+001d2a   cfe4     movff	0xfe4, 0xfd9       	MOVFF	PREINC1, FSR2L
+001d2c   ffd9
+001d2e   0012     return	0                 	RETURN	
+                                           
+                                           ; ; Starting pCode block
+                                           S_test__ConfigTimer1	code
+                                           _ConfigTimer1:
+                                           ;	.line	74; test.c	void ConfigTimer1(void){
+001cd8   cfd9     movff	0xfd9, 0xfe5       	MOVFF	FSR2L, POSTDEC1
+001cda   ffe5
+001cdc   cfe1     movff	0xfe1, 0xfd9       	MOVFF	FSR1L, FSR2L
+001cde   ffd9
+                                           ;	.line	75; test.c	T1CONbits.RD16 = 0; // Utilisation de 8 bits
+001ce0   9ecd     bcf	0xcd, 0x7, 0         	BCF	_T1CONbits, 7
+                                           ;	.line	76; test.c	T1CONbits.T1RUN = 0; // Utilise l'oscillateur du TMR1
+001ce2   9ccd     bcf	0xcd, 0x6, 0         	BCF	_T1CONbits, 6
+                                           ;	.line	77; test.c	T1CONbits.T1CKPS0 = 0; // désactiver le prescaler (1:1)
+001ce4   98cd     bcf	0xcd, 0x4, 0         	BCF	_T1CONbits, 4
+                                           ;	.line	78; test.c	T1CONbits.T1CKPS1 = 0;
+001ce6   9acd     bcf	0xcd, 0x5, 0         	BCF	_T1CONbits, 5
+                                           ;	.line	79; test.c	T1CONbits.T1OSCEN = 1; // Active l'oscillateur
+001ce8   86cd     bsf	0xcd, 0x3, 0         	BSF	_T1CONbits, 3
+                                           ;	.line	80; test.c	T1CONbits.TMR1CS = 1; // Utilise la clock de l'oscillateur.
+001cea   82cd     bsf	0xcd, 0x1, 0         	BSF	_T1CONbits, 1
+                                           ;	.line	81; test.c	TMR1H = 0x80; // On commence à la moitié de la valeur max sinon le timer compte 2 secondes.
+001cec   0e80     movlw	0x80               	MOVLW	0x80
+001cee   6ecf     movwf	0xcf, 0            	MOVWF	_TMR1H
+001cf0   cfe4     movff	0xfe4, 0xfd9       	MOVFF	PREINC1, FSR2L
+001cf2   ffd9
+001cf4   0012     return	0                 	RETURN	
+                                           
+                                           ; ; Starting pCode block
+                                           S_test__ConfigTimer0	code
+                                           _ConfigTimer0:
+                                           ;	.line	54; test.c	void ConfigTimer0(void){
+001cf6   cfd9     movff	0xfd9, 0xfe5       	MOVFF	FSR2L, POSTDEC1
+001cf8   ffe5
+001cfa   cfe1     movff	0xfe1, 0xfd9       	MOVFF	FSR1L, FSR2L
+001cfc   ffd9
+                                           ;	.line	55; test.c	T0CONbits.T08BIT = 0; 	//Utilisation des 16 bits du TIMER0	
+001cfe   9cd5     bcf	0xd5, 0x6, 0         	BCF	_T0CONbits, 6
+                                           ;	.line	56; test.c	T0CONbits.T0CS = 0; // Comptage à partir de l'horloge
+001d00   9ad5     bcf	0xd5, 0x5, 0         	BCF	_T0CONbits, 5
+                                           ;	.line	57; test.c	T0CONbits.PSA = 0; // activation du prescaler
+001d02   96d5     bcf	0xd5, 0x3, 0         	BCF	_T0CONbits, 3
+                                           ;	.line	58; test.c	T0CONbits.T0PS0 = 1; // diviseur par 256 
+001d04   80d5     bsf	0xd5, 0, 0           	BSF	_T0CONbits, 0
+                                           ;	.line	59; test.c	T0CONbits.T0PS1 = 1;
+001d06   82d5     bsf	0xd5, 0x1, 0         	BSF	_T0CONbits, 1
+                                           ;	.line	60; test.c	T0CONbits.T0PS2 = 1;
+001d08   84d5     bsf	0xd5, 0x2, 0         	BSF	_T0CONbits, 2
+                                           ;	.line	61; test.c	TMR0L = 0; // on compte à partir de zero
+001d0a   6ad6     clrf	0xd6, 0             	CLRF	_TMR0L
+                                           ;	.line	62; test.c	TMR0H = 0;
+001d0c   6ad7     clrf	0xd7, 0             	CLRF	_TMR0H
+001d0e   cfe4     movff	0xfe4, 0xfd9       	MOVFF	PREINC1, FSR2L
+001d10   ffd9
+001d12   0012     return	0                 	RETURN	
+                                           
+                                           ; ; Starting pCode block
+                                           S_test__InitDisplay	code
+                                           _InitDisplay:
+                                           ;	.line	40; test.c	void InitDisplay(void){
+001c8c   cfd9     movff	0xfd9, 0xfe5       	MOVFF	FSR2L, POSTDEC1
+001c8e   ffe5
+001c90   cfe1     movff	0xfe1, 0xfd9       	MOVFF	FSR1L, FSR2L
+001c92   ffd9
+                                           ;	.line	41; test.c	LCDInit();
+001c94   ec56     call	0xaac, 0            	CALL	_LCDInit
+001c96   f005
+001c98   cfe4     movff	0xfe4, 0xfd9       	MOVFF	PREINC1, FSR2L
+001c9a   ffd9
+001c9c   0012     return	0                 	RETURN	
+                                           
+                                           ; ; Starting pCode block
+                                           __str_0:
+001c9e   7453     btg	0x53, 0x2, 0         	DB	0x53, 0x74, 0x61, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x20, 0x54, 0x65, 0x73
+001ca0   7261     btg	0x61, 0x1, 0         
+001ca2   6974     setf	0x74, 0x1           
+001ca4   676e     tstfsz	0x6e, 0x1         
+001ca6   5420     subfwb	0x20, 0, 0        
+001ca8   7365     btg	0x65, 0x1, 0x1       
+001caa   2074     addwfc	0x74, 0, 0        	DB	0x74, 0x20, 0x21, 0x00
+001cac   0021     dw	0x21  ;unknown opcode 
+                                           ; ; Starting pCode block
+                                           __str_1:
+001cae   6156     cpfslt	0x56, 0x1         	DB	0x56, 0x61, 0x6c, 0x3a, 0x20, 0x25, 0x75, 0x00
+001cb0   3a6c     swapf	0x6c, 0x1, 0       
+001cb2   2520     addwf	0x20, 0, 0x1       
+001cb4   0075     dw	0x75  ;unknown opcode 
+                                           
+                                           
+                                           ; Statistics:
+                                           ; code size:	 1420 (0x058c) bytes ( 1.08%)
+                                           ;           	  710 (0x02c6) words
+                                           ; udata size:	   40 (0x0028) bytes ( 1.04%)
+                                           ; access size:	   22 (0x0016) bytes
+                                           
+                                           
+                                           	end
+                                           ;--------------------------------------------------------
+                                           ; File Created by SDCC : free open source ANSI-C Compiler
+                                           ; Version 2.9.4 #5595 (Mar 19 2013) (UNIX)
+                                           ; This file was generated Wed Mar 20 15:50:03 2013
+                                           ;--------------------------------------------------------
+                                           ; PIC16 port for the Microchip 16-bit core micros
+                                           ;--------------------------------------------------------
+                                           	list	p=18f97j60
+                                           
+                                           	radix dec
+                                           
+                                           ;--------------------------------------------------------
+                                           ; public variables in this module
+                                           ;--------------------------------------------------------
+                                           	global _LCDInit
+                                           	global _LCDUpdate
+                                           	global _LCDErase
+                                           	global _LCDText
+                                           
+                                           ;--------------------------------------------------------
+                                           ; extern variables in this module
+                                           ;--------------------------------------------------------
+                                           	extern _EBSTCONbits
+                                           	extern _MISTATbits
+                                           	extern _EFLOCONbits
+                                           	extern _MACON1bits
+                                           	extern _MACON2bits
+                                           	extern _MACON3bits
+                                           	extern _MACON4bits
+                                           	extern _MACLCON1bits
+                                           	extern _MACLCON2bits
+                                           	extern _MICONbits
+                                           	extern _MICMDbits
+                                           	extern _EWOLIEbits
+                                           	extern _EWOLIRbits
+                                           	extern _ERXFCONbits
+                                           	extern _EIEbits
+                                           	extern _ESTATbits
+                                           	extern _ECON2bits
+                                           	extern _EIRbits
+                                           	extern _EDATAbits
+                                           	extern _SSP2CON2bits
+                                           	extern _SSP2CON1bits
+                                           	extern _SSP2STATbits
+                                           	extern _ECCP2DELbits
+                                           	extern _ECCP2ASbits
+                                           	extern _ECCP3DELbits
+                                           	extern _ECCP3ASbits
+                                           	extern _RCSTA2bits
+                                           	extern _TXSTA2bits
+                                           	extern _CCP5CONbits
+                                           	extern _CCP4CONbits
+                                           	extern _T4CONbits
+                                           	extern _ECCP1DELbits
+                                           	extern _BAUDCON2bits
+                                           	extern _BAUDCTL2bits
+                                           	extern _BAUDCONbits
+                                           	extern _BAUDCON1bits
+                                           	extern _BAUDCTLbits
+                                           	extern _BAUDCTL1bits
+                                           	extern _PORTAbits
+                                           	extern _PORTBbits
+                                           	extern _PORTCbits
+                                           	extern _PORTDbits
+                                           	extern _PORTEbits
+                                           	extern _PORTFbits
+                                           	extern _PORTGbits
+                                           	extern _PORTHbits
+                                           	extern _PORTJbits
+                                           	extern _LATAbits
+                                           	extern _LATBbits
+                                           	extern _LATCbits
+                                           	extern _LATDbits
+                                           	extern _LATEbits
+                                           	extern _LATFbits
+                                           	extern _LATGbits
+                                           	extern _LATHbits
+                                           	extern _LATJbits
+                                           	extern _DDRAbits
+                                           	extern _TRISAbits
+                                           	extern _DDRBbits
+                                           	extern _TRISBbits
+                                           	extern _DDRCbits
+                                           	extern _TRISCbits
+                                           	extern _DDRDbits
+                                           	extern _TRISDbits
+                                           	extern _DDREbits
+                                           	extern _TRISEbits
+                                           	extern _DDRFbits
+                                           	extern _TRISFbits
+                                           	extern _DDRGbits
+                                           	extern _TRISGbits
+                                           	extern _DDRHbits
+                                           	extern _TRISHbits
+                                           	extern _DDRJbits
+                                           	extern _TRISJbits
+                                           	extern _OSCTUNEbits
+                                           	extern _MEMCONbits
+                                           	extern _PIE1bits
+                                           	extern _PIR1bits
+                                           	extern _IPR1bits
+                                           	extern _PIE2bits
+                                           	extern _PIR2bits
+                                           	extern _IPR2bits
+                                           	extern _PIE3bits
+                                           	extern _PIR3bits
+                                           	extern _IPR3bits
+                                           	extern _EECON1bits
+                                           	extern _RCSTAbits
+                                           	extern _RCSTA1bits
+                                           	extern _TXSTAbits
+                                           	extern _TXSTA1bits
+                                           	extern _PSPCONbits
+                                           	extern _T3CONbits
+                                           	extern _CMCONbits
+                                           	extern _CVRCONbits
+                                           	extern _ECCP1ASbits
+                                           	extern _CCP3CONbits
+                                           	extern _ECCP3CONbits
+                                           	extern _CCP2CONbits
+                                           	extern _ECCP2CONbits
+                                           	extern _CCP1CONbits
+                                           	extern _ECCP1CONbits
+                                           	extern _ADCON2bits
+                                           	extern _ADCON1bits
+                                           	extern _ADCON0bits
+                                           	extern _SSP1CON2bits
+                                           	extern _SSPCON2bits
+                                           	extern _SSP1CON1bits
+                                           	extern _SSPCON1bits
+                                           	extern _SSP1STATbits
+                                           	extern _SSPSTATbits
+                                           	extern _T2CONbits
+                                           	extern _T1CONbits
+                                           	extern _RCONbits
+                                           	extern _WDTCONbits
+                                           	extern _ECON1bits
+                                           	extern _OSCCONbits
+                                           	extern _T0CONbits
+                                           	extern _STATUSbits
+                                           	extern _INTCON3bits
+                                           	extern _INTCON2bits
+                                           	extern _INTCONbits
+                                           	extern _STKPTRbits
+                                           	extern _stdin
+                                           	extern _stdout
+                                           	extern _AN0String
+                                           	extern _AppConfig
+                                           	extern _activeUDPSocket
+                                           	extern _UDPSocketInfo
+                                           	extern _UDPTxCount
+                                           	extern _UDPRxCount
+                                           	extern _MAADR5
+                                           	extern _MAADR6
+                                           	extern _MAADR3
+                                           	extern _MAADR4
+                                           	extern _MAADR1
+                                           	extern _MAADR2
+                                           	extern _EBSTSD
+                                           	extern _EBSTCON
+                                           	extern _EBSTCS
+                                           	extern _EBSTCSL
+                                           	extern _EBSTCSH
+                                           	extern _MISTAT
+                                           	extern _EFLOCON
+                                           	extern _EPAUS
+                                           	extern _EPAUSL
+                                           	extern _EPAUSH
+                                           	extern _MACON1
+                                           	extern _MACON2
+                                           	extern _MACON3
+                                           	extern _MACON4
+                                           	extern _MABBIPG
+                                           	extern _MAIPG
+                                           	extern _MAIPGL
+                                           	extern _MAIPGH
+                                           	extern _MACLCON1
+                                           	extern _MACLCON2
+                                           	extern _MAMXFL
+                                           	extern _MAMXFLL
+                                           	extern _MAMXFLH
+                                           	extern _MICON
+                                           	extern _MICMD
+                                           	extern _MIREGADR
+                                           	extern _MIWR
+                                           	extern _MIWRL
+                                           	extern _MIWRH
+                                           	extern _MIRD
+                                           	extern _MIRDL
+                                           	extern _MIRDH
+                                           	extern _EHT0
+                                           	extern _EHT1
+                                           	extern _EHT2
+                                           	extern _EHT3
+                                           	extern _EHT4
+                                           	extern _EHT5
+                                           	extern _EHT6
+                                           	extern _EHT7
+                                           	extern _EPMM0
+                                           	extern _EPMM1
+                                           	extern _EPMM2
+                                           	extern _EPMM3
+                                           	extern _EPMM4
+                                           	extern _EPMM5
+                                           	extern _EPMM6
+                                           	extern _EPMM7
+                                           	extern _EPMCS
+                                           	extern _EPMCSL
+                                           	extern _EPMCSH
+                                           	extern _EPMO
+                                           	extern _EPMOL
+                                           	extern _EPMOH
+                                           	extern _EWOLIE
+                                           	extern _EWOLIR
+                                           	extern _ERXFCON
+                                           	extern _EPKTCNT
+                                           	extern _EWRPT
+                                           	extern _EWRPTL
+                                           	extern _EWRPTH
+                                           	extern _ETXST
+                                           	extern _ETXSTL
+                                           	extern _ETXSTH
+                                           	extern _ETXND
+                                           	extern _ETXNDL
+                                           	extern _ETXNDH
+                                           	extern _ERXST
+                                           	extern _ERXSTL
+                                           	extern _ERXSTH
+                                           	extern _ERXND
+                                           	extern _ERXNDL
+                                           	extern _ERXNDH
+                                           	extern _ERXRDPT
+                                           	extern _ERXRDPTL
+                                           	extern _ERXRDPTH
+                                           	extern _ERXWRPT
+                                           	extern _ERXWRPTL
+                                           	extern _ERXWRPTH
+                                           	extern _EDMAST
+                                           	extern _EDMASTL
+                                           	extern _EDMASTH
+                                           	extern _EDMAND
+                                           	extern _EDMANDL
+                                           	extern _EDMANDH
+                                           	extern _EDMADST
+                                           	extern _EDMADSTL
+                                           	extern _EDMADSTH
+                                           	extern _EDMACS
+                                           	extern _EDMACSL
+                                           	extern _EDMACSH
+                                           	extern _EIE
+                                           	extern _ESTAT
+                                           	extern _ECON2
+                                           	extern _EIR
+                                           	extern _EDATA
+                                           	extern _SSP2CON2
+                                           	extern _SSP2CON1
+                                           	extern _SSP2STAT
+                                           	extern _SSP2ADD
+                                           	extern _SSP2BUF
+                                           	extern _ECCP2DEL
+                                           	extern _ECCP2AS
+                                           	extern _ECCP3DEL
+                                           	extern _ECCP3AS
+                                           	extern _RCSTA2
+                                           	extern _TXSTA2
+                                           	extern _TXREG2
+                                           	extern _RCREG2
+                                           	extern _SPBRG2
+                                           	extern _CCP5CON
+                                           	extern _CCPR5
+                                           	extern _CCPR5L
+                                           	extern _CCPR5H
+                                           	extern _CCP4CON
+                                           	extern _CCPR4
+                                           	extern _CCPR4L
+                                           	extern _CCPR4H
+                                           	extern _T4CON
+                                           	extern _PR4
+                                           	extern _TMR4
+                                           	extern _ECCP1DEL
+                                           	extern _ERDPT
+                                           	extern _ERDPTL
+                                           	extern _ERDPTH
+                                           	extern _BAUDCON2
+                                           	extern _BAUDCTL2
+                                           	extern _SPBRGH2
+                                           	extern _BAUDCON
+                                           	extern _BAUDCON1
+                                           	extern _BAUDCTL
+                                           	extern _BAUDCTL1
+                                           	extern _SPBRGH
+                                           	extern _SPBRGH1
+                                           	extern _PORTA
+                                           	extern _PORTB
+                                           	extern _PORTC
+                                           	extern _PORTD
+                                           	extern _PORTE
+                                           	extern _PORTF
+                                           	extern _PORTG
+                                           	extern _PORTH
+                                           	extern _PORTJ
+                                           	extern _LATA
+                                           	extern _LATB
+                                           	extern _LATC
+                                           	extern _LATD
+                                           	extern _LATE
+                                           	extern _LATF
+                                           	extern _LATG
+                                           	extern _LATH
+                                           	extern _LATJ
+                                           	extern _DDRA
+                                           	extern _TRISA
+                                           	extern _DDRB
+                                           	extern _TRISB
+                                           	extern _DDRC
+                                           	extern _TRISC
+                                           	extern _DDRD
+                                           	extern _TRISD
+                                           	extern _DDRE
+                                           	extern _TRISE
+                                           	extern _DDRF
+                                           	extern _TRISF
+                                           	extern _DDRG
+                                           	extern _TRISG
+                                           	extern _DDRH
+                                           	extern _TRISH
+                                           	extern _DDRJ
+                                           	extern _TRISJ
+                                           	extern _OSCTUNE
+                                           	extern _MEMCON
+                                           	extern _PIE1
+                                           	extern _PIR1
+                                           	extern _IPR1
+                                           	extern _PIE2
+                                           	extern _PIR2
+                                           	extern _IPR2
+                                           	extern _PIE3
+                                           	extern _PIR3
+                                           	extern _IPR3
+                                           	extern _EECON1
+                                           	extern _EECON2
+                                           	extern _RCSTA
+                                           	extern _RCSTA1
+                                           	extern _TXSTA
+                                           	extern _TXSTA1
+                                           	extern _TXREG
+                                           	extern _TXREG1
+                                           	extern _RCREG
+                                           	extern _RCREG1
+                                           	extern _SPBRG
+                                           	extern _SPBRG1
+                                           	extern _PSPCON
+                                           	extern _T3CON
+                                           	extern _TMR3L
+                                           	extern _TMR3H
+                                           	extern _CMCON
+                                           	extern _CVRCON
+                                           	extern _ECCP1AS
+                                           	extern _CCP3CON
+                                           	extern _ECCP3CON
+                                           	extern _CCPR3
+                                           	extern _CCPR3L
+                                           	extern _CCPR3H
+                                           	extern _CCP2CON
+                                           	extern _ECCP2CON
+                                           	extern _CCPR2
+                                           	extern _CCPR2L
+                                           	extern _CCPR2H
+                                           	extern _CCP1CON
+                                           	extern _ECCP1CON
+                                           	extern _CCPR1
+                                           	extern _CCPR1L
+                                           	extern _CCPR1H
+                                           	extern _ADCON2
+                                           	extern _ADCON1
+                                           	extern _ADCON0
+                                           	extern _ADRES
+                                           	extern _ADRESL
+                                           	extern _ADRESH
+                                           	extern _SSP1CON2
+                                           	extern _SSPCON2
+                                           	extern _SSP1CON1
+                                           	extern _SSPCON1
+                                           	extern _SSP1STAT
+                                           	extern _SSPSTAT
+                                           	extern _SSP1ADD
+                                           	extern _SSPADD
+                                           	extern _SSP1BUF
+                                           	extern _SSPBUF
+                                           	extern _T2CON
+                                           	extern _PR2
+                                           	extern _TMR2
+                                           	extern _T1CON
+                                           	extern _TMR1L
+                                           	extern _TMR1H
+                                           	extern _RCON
+                                           	extern _WDTCON
+                                           	extern _ECON1
+                                           	extern _OSCCON
+                                           	extern _T0CON
+                                           	extern _TMR0L
+                                           	extern _TMR0H
+                                           	extern _STATUS
+                                           	extern _FSR2L
+                                           	extern _FSR2H
+                                           	extern _PLUSW2
+                                           	extern _PREINC2
+                                           	extern _POSTDEC2
+                                           	extern _POSTINC2
+                                           	extern _INDF2
+                                           	extern _BSR
+                                           	extern _FSR1L
+                                           	extern _FSR1H
+                                           	extern _PLUSW1
+                                           	extern _PREINC1
+                                           	extern _POSTDEC1
+                                           	extern _POSTINC1
+                                           	extern _INDF1
+                                           	extern _WREG
+                                           	extern _FSR0L
+                                           	extern _FSR0H
+                                           	extern _PLUSW0
+                                           	extern _PREINC0
+                                           	extern _POSTDEC0
+                                           	extern _POSTINC0
+                                           	extern _INDF0
+                                           	extern _INTCON3
+                                           	extern _INTCON2
+                                           	extern _INTCON
+                                           	extern _PROD
+                                           	extern _PRODL
+                                           	extern _PRODH
+                                           	extern _TABLAT
+                                           	extern _TBLPTR
+                                           	extern _TBLPTRL
+                                           	extern _TBLPTRH
+                                           	extern _TBLPTRU
+                                           	extern _PC
+                                           	extern _PCL
+                                           	extern _PCLATH
+                                           	extern _PCLATU
+                                           	extern _STKPTR
+                                           	extern _TOS
+                                           	extern _TOSL
+                                           	extern _TOSH
+                                           	extern _TOSU
+                                           	extern _memset
+                                           ;--------------------------------------------------------
+                                           ;	Equates to used internal registers
+                                           ;--------------------------------------------------------
+                                           STATUS	equ	0xfd8
+                                           WREG	equ	0xfe8
+                                           FSR0L	equ	0xfe9
+                                           FSR0H	equ	0xfea
+                                           FSR1L	equ	0xfe1
+                                           FSR2L	equ	0xfd9
+                                           INDF0	equ	0xfef
+                                           POSTDEC1	equ	0xfe5
+                                           PREINC1	equ	0xfe4
+                                           PLUSW2	equ	0xfdb
+                                           PRODH	equ	0xff4
+                                           
+                                           
+                                           ; Internal registers
+                                           .registers	udata_ovr	0x0000
+                                           r0x00	res	1
+                                           r0x01	res	1
+                                           r0x02	res	1
+                                           r0x03	res	1
+                                           r0x04	res	1
+                                           r0x05	res	1
+                                           r0x06	res	1
+                                           r0x07	res	1
+                                           r0x08	res	1
+                                           
+                                           udata_LCDBlocking_0	udata
+                                           _LCDText	res	33
+                                           
+                                           ;--------------------------------------------------------
+                                           ; global & static initialisations
+                                           ;--------------------------------------------------------
+                                           ; I code from now on!
+                                           ; ; Starting pCode block
+                                           S_LCDBlocking__LCDErase	code
+                                           _LCDErase:
+                                           ;	.line	392; TCPIP_Stack/LCDBlocking.c	void LCDErase(void)
+001968   cfd9     movff	0xfd9, 0xfe5       	MOVFF	FSR2L, POSTDEC1
+00196a   ffe5
+00196c   cfe1     movff	0xfe1, 0xfd9       	MOVFF	FSR1L, FSR2L
+00196e   ffd9
+001970   c000     movff	0, 0xfe5           	MOVFF	r0x00, POSTDEC1
+001972   ffe5
+001974   c001     movff	0x1, 0xfe5         	MOVFF	r0x01, POSTDEC1
+001976   ffe5
+001978   c002     movff	0x2, 0xfe5         	MOVFF	r0x02, POSTDEC1
+00197a   ffe5
+00197c   c003     movff	0x3, 0xfe5         	MOVFF	r0x03, POSTDEC1
+00197e   ffe5
+001980   c004     movff	0x4, 0xfe5         	MOVFF	r0x04, POSTDEC1
+001982   ffe5
+001984   c005     movff	0x5, 0xfe5         	MOVFF	r0x05, POSTDEC1
+001986   ffe5
+001988   c006     movff	0x6, 0xfe5         	MOVFF	r0x06, POSTDEC1
+00198a   ffe5
+00198c   c007     movff	0x7, 0xfe5         	MOVFF	r0x07, POSTDEC1
+00198e   ffe5
+                                           ;	.line	395; TCPIP_Stack/LCDBlocking.c	LCDWrite(0, 0x01);
+001990   0e01     movlw	0x1                	MOVLW	0x01
+001992   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001994   0e00     movlw	0                  	MOVLW	0x00
+001996   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+001998   ec98     call	0x1b30, 0           	CALL	_LCDWrite
+00199a   f00d
+00199c   0e02     movlw	0x2                	MOVLW	0x02
+00199e   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           ;	.line	396; TCPIP_Stack/LCDBlocking.c	DelayMs(2);
+0019a0   0e48     movlw	0x48               	MOVLW	0x48
+0019a2   6e00     movwf	0, 0               	MOVWF	r0x00
+0019a4   0e0d     movlw	0xd                	MOVLW	0x0d
+0019a6   6e01     movwf	0x1, 0             	MOVWF	r0x01
+0019a8   6a02     clrf	0x2, 0              	CLRF	r0x02
+0019aa   6a03     clrf	0x3, 0              	CLRF	r0x03
+                                           _00305_DS_:
+0019ac   c000     movff	0, 0x4             	MOVFF	r0x00, r0x04
+0019ae   f004
+0019b0   c001     movff	0x1, 0x5           	MOVFF	r0x01, r0x05
+0019b2   f005
+0019b4   c002     movff	0x2, 0x6           	MOVFF	r0x02, r0x06
+0019b6   f006
+0019b8   c003     movff	0x3, 0x7           	MOVFF	r0x03, r0x07
+0019ba   f007
+0019bc   0eff     movlw	0xff               	MOVLW	0xff
+0019be   2600     addwf	0, 0x1, 0          	ADDWF	r0x00, F
+0019c0   0eff     movlw	0xff               	MOVLW	0xff
+0019c2   2201     addwfc	0x1, 0x1, 0       	ADDWFC	r0x01, F
+0019c4   0eff     movlw	0xff               	MOVLW	0xff
+0019c6   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+0019c8   0eff     movlw	0xff               	MOVLW	0xff
+0019ca   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+0019cc   5004     movf	0x4, 0, 0           	MOVF	r0x04, W
+0019ce   1005     iorwf	0x5, 0, 0          	IORWF	r0x05, W
+0019d0   1006     iorwf	0x6, 0, 0          	IORWF	r0x06, W
+0019d2   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+0019d4   e1eb     bnz	0x19ac               	BNZ	_00305_DS_
+                                           ;	.line	399; TCPIP_Stack/LCDBlocking.c	memset(LCDText, ' ', 32);
+0019d6   0e00     movlw	0                  	MOVLW	0x00
+0019d8   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0019da   0e20     movlw	0x20               	MOVLW	0x20
+0019dc   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0019de   0e20     movlw	0x20               	MOVLW	0x20
+0019e0   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0019e2   0e0f     movlw	0xf                	MOVLW	HIGH(_LCDText)
+0019e4   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0019e6   0e00     movlw	0                  	MOVLW	LOW(_LCDText)
+0019e8   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+0019ea   eceb     call	0x17d6, 0           	CALL	_memset
+0019ec   f00b
+0019ee   0e05     movlw	0x5                	MOVLW	0x05
+0019f0   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+0019f2   cfe4     movff	0xfe4, 0x7         	MOVFF	PREINC1, r0x07
+0019f4   f007
+0019f6   cfe4     movff	0xfe4, 0x6         	MOVFF	PREINC1, r0x06
+0019f8   f006
+0019fa   cfe4     movff	0xfe4, 0x5         	MOVFF	PREINC1, r0x05
+0019fc   f005
+0019fe   cfe4     movff	0xfe4, 0x4         	MOVFF	PREINC1, r0x04
+001a00   f004
+001a02   cfe4     movff	0xfe4, 0x3         	MOVFF	PREINC1, r0x03
+001a04   f003
+001a06   cfe4     movff	0xfe4, 0x2         	MOVFF	PREINC1, r0x02
+001a08   f002
+001a0a   cfe4     movff	0xfe4, 0x1         	MOVFF	PREINC1, r0x01
+001a0c   f001
+001a0e   cfe4     movff	0xfe4, 0           	MOVFF	PREINC1, r0x00
+001a10   f000
+001a12   cfe4     movff	0xfe4, 0xfd9       	MOVFF	PREINC1, FSR2L
+001a14   ffd9
+001a16   0012     return	0                 	RETURN	
+                                           
+                                           ; ; Starting pCode block
+                                           S_LCDBlocking__LCDUpdate	code
+                                           _LCDUpdate:
+                                           ;	.line	332; TCPIP_Stack/LCDBlocking.c	void LCDUpdate(void)
+000842   cfd9     movff	0xfd9, 0xfe5       	MOVFF	FSR2L, POSTDEC1
+000844   ffe5
+000846   cfe1     movff	0xfe1, 0xfd9       	MOVFF	FSR1L, FSR2L
+000848   ffd9
+00084a   c000     movff	0, 0xfe5           	MOVFF	r0x00, POSTDEC1
+00084c   ffe5
+00084e   c001     movff	0x1, 0xfe5         	MOVFF	r0x01, POSTDEC1
+000850   ffe5
+000852   c002     movff	0x2, 0xfe5         	MOVFF	r0x02, POSTDEC1
+000854   ffe5
+000856   c003     movff	0x3, 0xfe5         	MOVFF	r0x03, POSTDEC1
+000858   ffe5
+00085a   c004     movff	0x4, 0xfe5         	MOVFF	r0x04, POSTDEC1
+00085c   ffe5
+00085e   c005     movff	0x5, 0xfe5         	MOVFF	r0x05, POSTDEC1
+000860   ffe5
+000862   c006     movff	0x6, 0xfe5         	MOVFF	r0x06, POSTDEC1
+000864   ffe5
+000866   c007     movff	0x7, 0xfe5         	MOVFF	r0x07, POSTDEC1
+000868   ffe5
+00086a   c008     movff	0x8, 0xfe5         	MOVFF	r0x08, POSTDEC1
+00086c   ffe5
+                                           ;	.line	337; TCPIP_Stack/LCDBlocking.c	LCDWrite(0, 0x02);
+00086e   0e02     movlw	0x2                	MOVLW	0x02
+000870   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000872   0e00     movlw	0                  	MOVLW	0x00
+000874   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000876   ec98     call	0x1b30, 0           	CALL	_LCDWrite
+000878   f00d
+00087a   0e02     movlw	0x2                	MOVLW	0x02
+00087c   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           ;	.line	338; TCPIP_Stack/LCDBlocking.c	DelayMs(2);
+00087e   0e48     movlw	0x48               	MOVLW	0x48
+000880   6e00     movwf	0, 0               	MOVWF	r0x00
+000882   0e0d     movlw	0xd                	MOVLW	0x0d
+000884   6e01     movwf	0x1, 0             	MOVWF	r0x01
+000886   6a02     clrf	0x2, 0              	CLRF	r0x02
+000888   6a03     clrf	0x3, 0              	CLRF	r0x03
+                                           _00225_DS_:
+00088a   c000     movff	0, 0x4             	MOVFF	r0x00, r0x04
+00088c   f004
+00088e   c001     movff	0x1, 0x5           	MOVFF	r0x01, r0x05
+000890   f005
+000892   c002     movff	0x2, 0x6           	MOVFF	r0x02, r0x06
+000894   f006
+000896   c003     movff	0x3, 0x7           	MOVFF	r0x03, r0x07
+000898   f007
+00089a   0eff     movlw	0xff               	MOVLW	0xff
+00089c   2600     addwf	0, 0x1, 0          	ADDWF	r0x00, F
+00089e   0eff     movlw	0xff               	MOVLW	0xff
+0008a0   2201     addwfc	0x1, 0x1, 0       	ADDWFC	r0x01, F
+0008a2   0eff     movlw	0xff               	MOVLW	0xff
+0008a4   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+0008a6   0eff     movlw	0xff               	MOVLW	0xff
+0008a8   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+0008aa   5004     movf	0x4, 0, 0           	MOVF	r0x04, W
+0008ac   1005     iorwf	0x5, 0, 0          	IORWF	r0x05, W
+0008ae   1006     iorwf	0x6, 0, 0          	IORWF	r0x06, W
+0008b0   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+0008b2   e1eb     bnz	0x88a                	BNZ	_00225_DS_
+                                           ;	.line	341; TCPIP_Stack/LCDBlocking.c	for(i = 0; i < 16u; i++)
+0008b4   6a00     clrf	0, 0                	CLRF	r0x00
+                                           _00257_DS_:
+0008b6   c000     movff	0, 0x1             	MOVFF	r0x00, r0x01
+0008b8   f001
+0008ba   6a02     clrf	0x2, 0              	CLRF	r0x02
+0008bc   0e00     movlw	0                  	MOVLW	0x00
+0008be   5c02     subwf	0x2, 0, 0          	SUBWF	r0x02, W
+0008c0   e102     bnz	0x8c6                	BNZ	_00297_DS_
+0008c2   0e10     movlw	0x10               	MOVLW	0x10
+0008c4   5c01     subwf	0x1, 0, 0          	SUBWF	r0x01, W
+                                           _00297_DS_:
+0008c6   b0d8     btfsc	0xd8, 0, 0         	BTFSC	STATUS, 0
+0008c8   d057     bra	0x978                	BRA	_00260_DS_
+                                           ;	.line	345; TCPIP_Stack/LCDBlocking.c	if(LCDText[i] == 0u)
+0008ca   0e00     movlw	0                  	MOVLW	LOW(_LCDText)
+0008cc   2400     addwf	0, 0, 0            	ADDWF	r0x00, W
+0008ce   6e01     movwf	0x1, 0             	MOVWF	r0x01
+0008d0   6a02     clrf	0x2, 0              	CLRF	r0x02
+0008d2   0e0f     movlw	0xf                	MOVLW	HIGH(_LCDText)
+0008d4   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+0008d6   c001     movff	0x1, 0xfe9         	MOVFF	r0x01, FSR0L
+0008d8   ffe9
+0008da   c002     movff	0x2, 0xfea         	MOVFF	r0x02, FSR0H
+0008dc   ffea
+0008de   cfef     movff	0xfef, 0x1         	MOVFF	INDF0, r0x01
+0008e0   f001
+0008e2   5001     movf	0x1, 0, 0           	MOVF	r0x01, W
+0008e4   e119     bnz	0x918                	BNZ	_00232_DS_
+                                           ;	.line	347; TCPIP_Stack/LCDBlocking.c	for(j=i; j < 16u; j++)
+0008e6   c000     movff	0, 0x1             	MOVFF	r0x00, r0x01
+0008e8   f001
+                                           _00253_DS_:
+0008ea   c001     movff	0x1, 0x2           	MOVFF	r0x01, r0x02
+0008ec   f002
+0008ee   6a03     clrf	0x3, 0              	CLRF	r0x03
+0008f0   0e00     movlw	0                  	MOVLW	0x00
+0008f2   5c03     subwf	0x3, 0, 0          	SUBWF	r0x03, W
+0008f4   e102     bnz	0x8fa                	BNZ	_00298_DS_
+0008f6   0e10     movlw	0x10               	MOVLW	0x10
+0008f8   5c02     subwf	0x2, 0, 0          	SUBWF	r0x02, W
+                                           _00298_DS_:
+0008fa   e20e     bc	0x918                 	BC	_00232_DS_
+                                           ;	.line	349; TCPIP_Stack/LCDBlocking.c	LCDText[j] = ' ';
+0008fc   0e00     movlw	0                  	MOVLW	LOW(_LCDText)
+0008fe   2401     addwf	0x1, 0, 0          	ADDWF	r0x01, W
+000900   6e02     movwf	0x2, 0             	MOVWF	r0x02
+000902   6a03     clrf	0x3, 0              	CLRF	r0x03
+000904   0e0f     movlw	0xf                	MOVLW	HIGH(_LCDText)
+000906   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+000908   c002     movff	0x2, 0xfe9         	MOVFF	r0x02, FSR0L
+00090a   ffe9
+00090c   c003     movff	0x3, 0xfea         	MOVFF	r0x03, FSR0H
+00090e   ffea
+000910   0e20     movlw	0x20               	MOVLW	0x20
+000912   6eef     movwf	0xef, 0            	MOVWF	INDF0
+                                           ;	.line	347; TCPIP_Stack/LCDBlocking.c	for(j=i; j < 16u; j++)
+000914   2a01     incf	0x1, 0x1, 0         	INCF	r0x01, F
+000916   d7e9     bra	0x8ea                	BRA	_00253_DS_
+                                           _00232_DS_:
+                                           ;	.line	352; TCPIP_Stack/LCDBlocking.c	LCDWrite(1, LCDText[i]);
+000918   0e00     movlw	0                  	MOVLW	LOW(_LCDText)
+00091a   2400     addwf	0, 0, 0            	ADDWF	r0x00, W
+00091c   6e01     movwf	0x1, 0             	MOVWF	r0x01
+00091e   6a02     clrf	0x2, 0              	CLRF	r0x02
+000920   0e0f     movlw	0xf                	MOVLW	HIGH(_LCDText)
+000922   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+000924   c001     movff	0x1, 0xfe9         	MOVFF	r0x01, FSR0L
+000926   ffe9
+000928   c002     movff	0x2, 0xfea         	MOVFF	r0x02, FSR0H
+00092a   ffea
+00092c   cfef     movff	0xfef, 0x1         	MOVFF	INDF0, r0x01
+00092e   f001
+000930   5001     movf	0x1, 0, 0           	MOVF	r0x01, W
+000932   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000934   0e01     movlw	0x1                	MOVLW	0x01
+000936   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000938   ec98     call	0x1b30, 0           	CALL	_LCDWrite
+00093a   f00d
+00093c   0e02     movlw	0x2                	MOVLW	0x02
+00093e   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           ;	.line	353; TCPIP_Stack/LCDBlocking.c	Delay10us(5);
+000940   0e55     movlw	0x55               	MOVLW	0x55
+000942   6e01     movwf	0x1, 0             	MOVWF	r0x01
+000944   6a02     clrf	0x2, 0              	CLRF	r0x02
+000946   6a03     clrf	0x3, 0              	CLRF	r0x03
+000948   6a04     clrf	0x4, 0              	CLRF	r0x04
+                                           _00233_DS_:
+00094a   c001     movff	0x1, 0x5           	MOVFF	r0x01, r0x05
+00094c   f005
+00094e   c002     movff	0x2, 0x6           	MOVFF	r0x02, r0x06
+000950   f006
+000952   c003     movff	0x3, 0x7           	MOVFF	r0x03, r0x07
+000954   f007
+000956   c004     movff	0x4, 0x8           	MOVFF	r0x04, r0x08
+000958   f008
+00095a   0eff     movlw	0xff               	MOVLW	0xff
+00095c   2601     addwf	0x1, 0x1, 0        	ADDWF	r0x01, F
+00095e   0eff     movlw	0xff               	MOVLW	0xff
+000960   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+000962   0eff     movlw	0xff               	MOVLW	0xff
+000964   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+000966   0eff     movlw	0xff               	MOVLW	0xff
+000968   2204     addwfc	0x4, 0x1, 0       	ADDWFC	r0x04, F
+00096a   5005     movf	0x5, 0, 0           	MOVF	r0x05, W
+00096c   1006     iorwf	0x6, 0, 0          	IORWF	r0x06, W
+00096e   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+000970   1008     iorwf	0x8, 0, 0          	IORWF	r0x08, W
+000972   e1eb     bnz	0x94a                	BNZ	_00233_DS_
+                                           ;	.line	341; TCPIP_Stack/LCDBlocking.c	for(i = 0; i < 16u; i++)
+000974   2a00     incf	0, 0x1, 0           	INCF	r0x00, F
+000976   d79f     bra	0x8b6                	BRA	_00257_DS_
+                                           _00260_DS_:
+                                           ;	.line	357; TCPIP_Stack/LCDBlocking.c	LCDWrite(0, 0xC0);
+000978   0ec0     movlw	0xc0               	MOVLW	0xc0
+00097a   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+00097c   0e00     movlw	0                  	MOVLW	0x00
+00097e   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000980   ec98     call	0x1b30, 0           	CALL	_LCDWrite
+000982   f00d
+000984   0e02     movlw	0x2                	MOVLW	0x02
+000986   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           ;	.line	358; TCPIP_Stack/LCDBlocking.c	Delay10us(5);
+000988   0e55     movlw	0x55               	MOVLW	0x55
+00098a   6e00     movwf	0, 0               	MOVWF	r0x00
+00098c   6a01     clrf	0x1, 0              	CLRF	r0x01
+00098e   6a02     clrf	0x2, 0              	CLRF	r0x02
+000990   6a03     clrf	0x3, 0              	CLRF	r0x03
+                                           _00239_DS_:
+000992   c000     movff	0, 0x4             	MOVFF	r0x00, r0x04
+000994   f004
+000996   c001     movff	0x1, 0x5           	MOVFF	r0x01, r0x05
+000998   f005
+00099a   c002     movff	0x2, 0x6           	MOVFF	r0x02, r0x06
+00099c   f006
+00099e   c003     movff	0x3, 0x7           	MOVFF	r0x03, r0x07
+0009a0   f007
+0009a2   0eff     movlw	0xff               	MOVLW	0xff
+0009a4   2600     addwf	0, 0x1, 0          	ADDWF	r0x00, F
+0009a6   0eff     movlw	0xff               	MOVLW	0xff
+0009a8   2201     addwfc	0x1, 0x1, 0       	ADDWFC	r0x01, F
+0009aa   0eff     movlw	0xff               	MOVLW	0xff
+0009ac   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+0009ae   0eff     movlw	0xff               	MOVLW	0xff
+0009b0   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+0009b2   5004     movf	0x4, 0, 0           	MOVF	r0x04, W
+0009b4   1005     iorwf	0x5, 0, 0          	IORWF	r0x05, W
+0009b6   1006     iorwf	0x6, 0, 0          	IORWF	r0x06, W
+0009b8   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+0009ba   e1eb     bnz	0x992                	BNZ	_00239_DS_
+                                           ;	.line	361; TCPIP_Stack/LCDBlocking.c	for(i = 16; i < 32u; i++)
+0009bc   0e10     movlw	0x10               	MOVLW	0x10
+0009be   6e00     movwf	0, 0               	MOVWF	r0x00
+                                           _00265_DS_:
+0009c0   c000     movff	0, 0x1             	MOVFF	r0x00, r0x01
+0009c2   f001
+0009c4   6a02     clrf	0x2, 0              	CLRF	r0x02
+0009c6   0e00     movlw	0                  	MOVLW	0x00
+0009c8   5c02     subwf	0x2, 0, 0          	SUBWF	r0x02, W
+0009ca   e102     bnz	0x9d0                	BNZ	_00299_DS_
+0009cc   0e20     movlw	0x20               	MOVLW	0x20
+0009ce   5c01     subwf	0x1, 0, 0          	SUBWF	r0x01, W
+                                           _00299_DS_:
+0009d0   b0d8     btfsc	0xd8, 0, 0         	BTFSC	STATUS, 0
+0009d2   d057     bra	0xa82                	BRA	_00269_DS_
+                                           ;	.line	365; TCPIP_Stack/LCDBlocking.c	if(LCDText[i] == 0u)
+0009d4   0e00     movlw	0                  	MOVLW	LOW(_LCDText)
+0009d6   2400     addwf	0, 0, 0            	ADDWF	r0x00, W
+0009d8   6e01     movwf	0x1, 0             	MOVWF	r0x01
+0009da   6a02     clrf	0x2, 0              	CLRF	r0x02
+0009dc   0e0f     movlw	0xf                	MOVLW	HIGH(_LCDText)
+0009de   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+0009e0   c001     movff	0x1, 0xfe9         	MOVFF	r0x01, FSR0L
+0009e2   ffe9
+0009e4   c002     movff	0x2, 0xfea         	MOVFF	r0x02, FSR0H
+0009e6   ffea
+0009e8   cfef     movff	0xfef, 0x1         	MOVFF	INDF0, r0x01
+0009ea   f001
+0009ec   5001     movf	0x1, 0, 0           	MOVF	r0x01, W
+0009ee   e119     bnz	0xa22                	BNZ	_00246_DS_
+                                           ;	.line	367; TCPIP_Stack/LCDBlocking.c	for(j=i; j < 32u; j++)
+0009f0   c000     movff	0, 0x1             	MOVFF	r0x00, r0x01
+0009f2   f001
+                                           _00261_DS_:
+0009f4   c001     movff	0x1, 0x2           	MOVFF	r0x01, r0x02
+0009f6   f002
+0009f8   6a03     clrf	0x3, 0              	CLRF	r0x03
+0009fa   0e00     movlw	0                  	MOVLW	0x00
+0009fc   5c03     subwf	0x3, 0, 0          	SUBWF	r0x03, W
+0009fe   e102     bnz	0xa04                	BNZ	_00300_DS_
+000a00   0e20     movlw	0x20               	MOVLW	0x20
+000a02   5c02     subwf	0x2, 0, 0          	SUBWF	r0x02, W
+                                           _00300_DS_:
+000a04   e20e     bc	0xa22                 	BC	_00246_DS_
+                                           ;	.line	369; TCPIP_Stack/LCDBlocking.c	LCDText[j] = ' ';
+000a06   0e00     movlw	0                  	MOVLW	LOW(_LCDText)
+000a08   2401     addwf	0x1, 0, 0          	ADDWF	r0x01, W
+000a0a   6e02     movwf	0x2, 0             	MOVWF	r0x02
+000a0c   6a03     clrf	0x3, 0              	CLRF	r0x03
+000a0e   0e0f     movlw	0xf                	MOVLW	HIGH(_LCDText)
+000a10   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+000a12   c002     movff	0x2, 0xfe9         	MOVFF	r0x02, FSR0L
+000a14   ffe9
+000a16   c003     movff	0x3, 0xfea         	MOVFF	r0x03, FSR0H
+000a18   ffea
+000a1a   0e20     movlw	0x20               	MOVLW	0x20
+000a1c   6eef     movwf	0xef, 0            	MOVWF	INDF0
+                                           ;	.line	367; TCPIP_Stack/LCDBlocking.c	for(j=i; j < 32u; j++)
+000a1e   2a01     incf	0x1, 0x1, 0         	INCF	r0x01, F
+000a20   d7e9     bra	0x9f4                	BRA	_00261_DS_
+                                           _00246_DS_:
+                                           ;	.line	372; TCPIP_Stack/LCDBlocking.c	LCDWrite(1, LCDText[i]);
+000a22   0e00     movlw	0                  	MOVLW	LOW(_LCDText)
+000a24   2400     addwf	0, 0, 0            	ADDWF	r0x00, W
+000a26   6e01     movwf	0x1, 0             	MOVWF	r0x01
+000a28   6a02     clrf	0x2, 0              	CLRF	r0x02
+000a2a   0e0f     movlw	0xf                	MOVLW	HIGH(_LCDText)
+000a2c   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+000a2e   c001     movff	0x1, 0xfe9         	MOVFF	r0x01, FSR0L
+000a30   ffe9
+000a32   c002     movff	0x2, 0xfea         	MOVFF	r0x02, FSR0H
+000a34   ffea
+000a36   cfef     movff	0xfef, 0x1         	MOVFF	INDF0, r0x01
+000a38   f001
+000a3a   5001     movf	0x1, 0, 0           	MOVF	r0x01, W
+000a3c   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000a3e   0e01     movlw	0x1                	MOVLW	0x01
+000a40   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000a42   ec98     call	0x1b30, 0           	CALL	_LCDWrite
+000a44   f00d
+000a46   0e02     movlw	0x2                	MOVLW	0x02
+000a48   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           ;	.line	373; TCPIP_Stack/LCDBlocking.c	Delay10us(5);
+000a4a   0e55     movlw	0x55               	MOVLW	0x55
+000a4c   6e01     movwf	0x1, 0             	MOVWF	r0x01
+000a4e   6a02     clrf	0x2, 0              	CLRF	r0x02
+000a50   6a03     clrf	0x3, 0              	CLRF	r0x03
+000a52   6a04     clrf	0x4, 0              	CLRF	r0x04
+                                           _00247_DS_:
+000a54   c001     movff	0x1, 0x5           	MOVFF	r0x01, r0x05
+000a56   f005
+000a58   c002     movff	0x2, 0x6           	MOVFF	r0x02, r0x06
+000a5a   f006
+000a5c   c003     movff	0x3, 0x7           	MOVFF	r0x03, r0x07
+000a5e   f007
+000a60   c004     movff	0x4, 0x8           	MOVFF	r0x04, r0x08
+000a62   f008
+000a64   0eff     movlw	0xff               	MOVLW	0xff
+000a66   2601     addwf	0x1, 0x1, 0        	ADDWF	r0x01, F
+000a68   0eff     movlw	0xff               	MOVLW	0xff
+000a6a   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+000a6c   0eff     movlw	0xff               	MOVLW	0xff
+000a6e   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+000a70   0eff     movlw	0xff               	MOVLW	0xff
+000a72   2204     addwfc	0x4, 0x1, 0       	ADDWFC	r0x04, F
+000a74   5005     movf	0x5, 0, 0           	MOVF	r0x05, W
+000a76   1006     iorwf	0x6, 0, 0          	IORWF	r0x06, W
+000a78   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+000a7a   1008     iorwf	0x8, 0, 0          	IORWF	r0x08, W
+000a7c   e1eb     bnz	0xa54                	BNZ	_00247_DS_
+                                           ;	.line	361; TCPIP_Stack/LCDBlocking.c	for(i = 16; i < 32u; i++)
+000a7e   2a00     incf	0, 0x1, 0           	INCF	r0x00, F
+000a80   d79f     bra	0x9c0                	BRA	_00265_DS_
+                                           _00269_DS_:
+000a82   cfe4     movff	0xfe4, 0x8         	MOVFF	PREINC1, r0x08
+000a84   f008
+000a86   cfe4     movff	0xfe4, 0x7         	MOVFF	PREINC1, r0x07
+000a88   f007
+000a8a   cfe4     movff	0xfe4, 0x6         	MOVFF	PREINC1, r0x06
+000a8c   f006
+000a8e   cfe4     movff	0xfe4, 0x5         	MOVFF	PREINC1, r0x05
+000a90   f005
+000a92   cfe4     movff	0xfe4, 0x4         	MOVFF	PREINC1, r0x04
+000a94   f004
+000a96   cfe4     movff	0xfe4, 0x3         	MOVFF	PREINC1, r0x03
+000a98   f003
+000a9a   cfe4     movff	0xfe4, 0x2         	MOVFF	PREINC1, r0x02
+000a9c   f002
+000a9e   cfe4     movff	0xfe4, 0x1         	MOVFF	PREINC1, r0x01
+000aa0   f001
+000aa2   cfe4     movff	0xfe4, 0           	MOVFF	PREINC1, r0x00
+000aa4   f000
+000aa6   cfe4     movff	0xfe4, 0xfd9       	MOVFF	PREINC1, FSR2L
+000aa8   ffd9
+000aaa   0012     return	0                 	RETURN	
+                                           
+                                           ; ; Starting pCode block
+                                           S_LCDBlocking__LCDInit	code
+                                           _LCDInit:
+                                           ;	.line	207; TCPIP_Stack/LCDBlocking.c	void LCDInit(void)
+000aac   cfd9     movff	0xfd9, 0xfe5       	MOVFF	FSR2L, POSTDEC1
+000aae   ffe5
+000ab0   cfe1     movff	0xfe1, 0xfd9       	MOVFF	FSR1L, FSR2L
+000ab2   ffd9
+000ab4   c000     movff	0, 0xfe5           	MOVFF	r0x00, POSTDEC1
+000ab6   ffe5
+000ab8   c001     movff	0x1, 0xfe5         	MOVFF	r0x01, POSTDEC1
+000aba   ffe5
+000abc   c002     movff	0x2, 0xfe5         	MOVFF	r0x02, POSTDEC1
+000abe   ffe5
+000ac0   c003     movff	0x3, 0xfe5         	MOVFF	r0x03, POSTDEC1
+000ac2   ffe5
+000ac4   c004     movff	0x4, 0xfe5         	MOVFF	r0x04, POSTDEC1
+000ac6   ffe5
+000ac8   c005     movff	0x5, 0xfe5         	MOVFF	r0x05, POSTDEC1
+000aca   ffe5
+000acc   c006     movff	0x6, 0xfe5         	MOVFF	r0x06, POSTDEC1
+000ace   ffe5
+000ad0   c007     movff	0x7, 0xfe5         	MOVFF	r0x07, POSTDEC1
+000ad2   ffe5
+000ad4   c008     movff	0x8, 0xfe5         	MOVFF	r0x08, POSTDEC1
+000ad6   ffe5
+                                           ;	.line	211; TCPIP_Stack/LCDBlocking.c	memset(LCDText, ' ', sizeof(LCDText)-1);
+000ad8   0e00     movlw	0                  	MOVLW	0x00
+000ada   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000adc   0e20     movlw	0x20               	MOVLW	0x20
+000ade   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000ae0   0e20     movlw	0x20               	MOVLW	0x20
+000ae2   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000ae4   0e0f     movlw	0xf                	MOVLW	HIGH(_LCDText)
+000ae6   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000ae8   0e00     movlw	0                  	MOVLW	LOW(_LCDText)
+000aea   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000aec   eceb     call	0x17d6, 0           	CALL	_memset
+000aee   f00b
+000af0   0e05     movlw	0x5                	MOVLW	0x05
+000af2   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+000af4   010f     movlb	0xf                	BANKSEL	(_LCDText + 32)
+                                           ;	.line	212; TCPIP_Stack/LCDBlocking.c	LCDText[sizeof(LCDText)-1] = 0;
+000af6   6b20     clrf	0x20, 0x1           	CLRF	(_LCDText + 32), B
+                                           ;	.line	215; TCPIP_Stack/LCDBlocking.c	LCD_E_IO = 0;
+000af8   9090     bcf	0x90, 0, 0           	BCF	_LATHbits, 0
+                                           ;	.line	216; TCPIP_Stack/LCDBlocking.c	LCD_RD_WR_IO = 0;
+000afa   9290     bcf	0x90, 0x1, 0         	BCF	_LATHbits, 1
+                                           ;	.line	220; TCPIP_Stack/LCDBlocking.c	LCD_DATA_TRIS = 0x00;
+000afc   6a96     clrf	0x96, 0             	CLRF	_TRISE
+                                           ;	.line	233; TCPIP_Stack/LCDBlocking.c	LCD_RD_WR_TRIS = 0;
+000afe   9299     bcf	0x99, 0x1, 0         	BCF	_TRISHbits, 1
+                                           ;	.line	234; TCPIP_Stack/LCDBlocking.c	LCD_RS_TRIS = 0;
+000b00   9499     bcf	0x99, 0x2, 0         	BCF	_TRISHbits, 2
+                                           ;	.line	235; TCPIP_Stack/LCDBlocking.c	LCD_E_TRIS = 0;
+000b02   9099     bcf	0x99, 0, 0           	BCF	_TRISHbits, 0
+                                           ;	.line	239; TCPIP_Stack/LCDBlocking.c	DelayMs(40);
+000b04   0ea0     movlw	0xa0               	MOVLW	0xa0
+000b06   6e00     movwf	0, 0               	MOVWF	r0x00
+000b08   0e09     movlw	0x9                	MOVLW	0x09
+000b0a   6e01     movwf	0x1, 0             	MOVWF	r0x01
+000b0c   0e01     movlw	0x1                	MOVLW	0x01
+000b0e   6e02     movwf	0x2, 0             	MOVWF	r0x02
+000b10   6a03     clrf	0x3, 0              	CLRF	r0x03
+                                           _00143_DS_:
+000b12   c000     movff	0, 0x4             	MOVFF	r0x00, r0x04
+000b14   f004
+000b16   c001     movff	0x1, 0x5           	MOVFF	r0x01, r0x05
+000b18   f005
+000b1a   c002     movff	0x2, 0x6           	MOVFF	r0x02, r0x06
+000b1c   f006
+000b1e   c003     movff	0x3, 0x7           	MOVFF	r0x03, r0x07
+000b20   f007
+000b22   0eff     movlw	0xff               	MOVLW	0xff
+000b24   2600     addwf	0, 0x1, 0          	ADDWF	r0x00, F
+000b26   0eff     movlw	0xff               	MOVLW	0xff
+000b28   2201     addwfc	0x1, 0x1, 0       	ADDWFC	r0x01, F
+000b2a   0eff     movlw	0xff               	MOVLW	0xff
+000b2c   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+000b2e   0eff     movlw	0xff               	MOVLW	0xff
+000b30   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+000b32   5004     movf	0x4, 0, 0           	MOVF	r0x04, W
+000b34   1005     iorwf	0x5, 0, 0          	IORWF	r0x05, W
+000b36   1006     iorwf	0x6, 0, 0          	IORWF	r0x06, W
+000b38   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+000b3a   e1eb     bnz	0xb12                	BNZ	_00143_DS_
+                                           ;	.line	247; TCPIP_Stack/LCDBlocking.c	LCD_RS_IO = 0;
+000b3c   9490     bcf	0x90, 0x2, 0         	BCF	_LATHbits, 2
+                                           ;	.line	249; TCPIP_Stack/LCDBlocking.c	LCD_DATA_IO = 0x03;
+000b3e   0e03     movlw	0x3                	MOVLW	0x03
+000b40   6e8d     movwf	0x8d, 0            	MOVWF	_LATE
+000b42   0000     nop                      	nop 
+000b44   0000     nop                      	nop 
+                                           ;	.line	264; TCPIP_Stack/LCDBlocking.c	for(i = 0; i < 3u; i++)
+000b46   6a00     clrf	0, 0                	CLRF	r0x00
+                                           _00191_DS_:
+000b48   c000     movff	0, 0x1             	MOVFF	r0x00, r0x01
+000b4a   f001
+000b4c   6a02     clrf	0x2, 0              	CLRF	r0x02
+000b4e   0e00     movlw	0                  	MOVLW	0x00
+000b50   5c02     subwf	0x2, 0, 0          	SUBWF	r0x02, W
+000b52   e102     bnz	0xb58                	BNZ	_00220_DS_
+000b54   0e03     movlw	0x3                	MOVLW	0x03
+000b56   5c01     subwf	0x1, 0, 0          	SUBWF	r0x01, W
+                                           _00220_DS_:
+000b58   e239     bc	0xbcc                 	BC	_00194_DS_
+                                           ;	.line	266; TCPIP_Stack/LCDBlocking.c	LCD_E_IO = 1;
+000b5a   8090     bsf	0x90, 0, 0           	BSF	_LATHbits, 0
+                                           ;	.line	267; TCPIP_Stack/LCDBlocking.c	Delay10us(1);	       	// Wait E Pulse width time (min 230ns)
+000b5c   0e11     movlw	0x11               	MOVLW	0x11
+000b5e   6e01     movwf	0x1, 0             	MOVWF	r0x01
+000b60   6a02     clrf	0x2, 0              	CLRF	r0x02
+000b62   6a03     clrf	0x3, 0              	CLRF	r0x03
+000b64   6a04     clrf	0x4, 0              	CLRF	r0x04
+                                           _00155_DS_:
+000b66   c001     movff	0x1, 0x5           	MOVFF	r0x01, r0x05
+000b68   f005
+000b6a   c002     movff	0x2, 0x6           	MOVFF	r0x02, r0x06
+000b6c   f006
+000b6e   c003     movff	0x3, 0x7           	MOVFF	r0x03, r0x07
+000b70   f007
+000b72   c004     movff	0x4, 0x8           	MOVFF	r0x04, r0x08
+000b74   f008
+000b76   0eff     movlw	0xff               	MOVLW	0xff
+000b78   2601     addwf	0x1, 0x1, 0        	ADDWF	r0x01, F
+000b7a   0eff     movlw	0xff               	MOVLW	0xff
+000b7c   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+000b7e   0eff     movlw	0xff               	MOVLW	0xff
+000b80   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+000b82   0eff     movlw	0xff               	MOVLW	0xff
+000b84   2204     addwfc	0x4, 0x1, 0       	ADDWFC	r0x04, F
+000b86   5005     movf	0x5, 0, 0           	MOVF	r0x05, W
+000b88   1006     iorwf	0x6, 0, 0          	IORWF	r0x06, W
+000b8a   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+000b8c   1008     iorwf	0x8, 0, 0          	IORWF	r0x08, W
+000b8e   e1eb     bnz	0xb66                	BNZ	_00155_DS_
+                                           ;	.line	268; TCPIP_Stack/LCDBlocking.c	LCD_E_IO = 0;
+000b90   9090     bcf	0x90, 0, 0           	BCF	_LATHbits, 0
+                                           ;	.line	269; TCPIP_Stack/LCDBlocking.c	DelayMs(2);
+000b92   0e48     movlw	0x48               	MOVLW	0x48
+000b94   6e01     movwf	0x1, 0             	MOVWF	r0x01
+000b96   0e0d     movlw	0xd                	MOVLW	0x0d
+000b98   6e02     movwf	0x2, 0             	MOVWF	r0x02
+000b9a   6a03     clrf	0x3, 0              	CLRF	r0x03
+000b9c   6a04     clrf	0x4, 0              	CLRF	r0x04
+                                           _00161_DS_:
+000b9e   c001     movff	0x1, 0x5           	MOVFF	r0x01, r0x05
+000ba0   f005
+000ba2   c002     movff	0x2, 0x6           	MOVFF	r0x02, r0x06
+000ba4   f006
+000ba6   c003     movff	0x3, 0x7           	MOVFF	r0x03, r0x07
+000ba8   f007
+000baa   c004     movff	0x4, 0x8           	MOVFF	r0x04, r0x08
+000bac   f008
+000bae   0eff     movlw	0xff               	MOVLW	0xff
+000bb0   2601     addwf	0x1, 0x1, 0        	ADDWF	r0x01, F
+000bb2   0eff     movlw	0xff               	MOVLW	0xff
+000bb4   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+000bb6   0eff     movlw	0xff               	MOVLW	0xff
+000bb8   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+000bba   0eff     movlw	0xff               	MOVLW	0xff
+000bbc   2204     addwfc	0x4, 0x1, 0       	ADDWFC	r0x04, F
+000bbe   5005     movf	0x5, 0, 0           	MOVF	r0x05, W
+000bc0   1006     iorwf	0x6, 0, 0          	IORWF	r0x06, W
+000bc2   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+000bc4   1008     iorwf	0x8, 0, 0          	IORWF	r0x08, W
+000bc6   e1eb     bnz	0xb9e                	BNZ	_00161_DS_
+                                           ;	.line	264; TCPIP_Stack/LCDBlocking.c	for(i = 0; i < 3u; i++)
+000bc8   2a00     incf	0, 0x1, 0           	INCF	r0x00, F
+000bca   d7be     bra	0xb48                	BRA	_00191_DS_
+                                           _00194_DS_:
+                                           ;	.line	295; TCPIP_Stack/LCDBlocking.c	LCDWrite(0, 0x38);
+000bcc   0e38     movlw	0x38               	MOVLW	0x38
+000bce   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000bd0   0e00     movlw	0                  	MOVLW	0x00
+000bd2   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000bd4   ec98     call	0x1b30, 0           	CALL	_LCDWrite
+000bd6   f00d
+000bd8   0e02     movlw	0x2                	MOVLW	0x02
+000bda   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           ;	.line	297; TCPIP_Stack/LCDBlocking.c	Delay10us(5);
+000bdc   0e55     movlw	0x55               	MOVLW	0x55
+000bde   6e00     movwf	0, 0               	MOVWF	r0x00
+000be0   6a01     clrf	0x1, 0              	CLRF	r0x01
+000be2   6a02     clrf	0x2, 0              	CLRF	r0x02
+000be4   6a03     clrf	0x3, 0              	CLRF	r0x03
+                                           _00167_DS_:
+000be6   c000     movff	0, 0x4             	MOVFF	r0x00, r0x04
+000be8   f004
+000bea   c001     movff	0x1, 0x5           	MOVFF	r0x01, r0x05
+000bec   f005
+000bee   c002     movff	0x2, 0x6           	MOVFF	r0x02, r0x06
+000bf0   f006
+000bf2   c003     movff	0x3, 0x7           	MOVFF	r0x03, r0x07
+000bf4   f007
+000bf6   0eff     movlw	0xff               	MOVLW	0xff
+000bf8   2600     addwf	0, 0x1, 0          	ADDWF	r0x00, F
+000bfa   0eff     movlw	0xff               	MOVLW	0xff
+000bfc   2201     addwfc	0x1, 0x1, 0       	ADDWFC	r0x01, F
+000bfe   0eff     movlw	0xff               	MOVLW	0xff
+000c00   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+000c02   0eff     movlw	0xff               	MOVLW	0xff
+000c04   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+000c06   5004     movf	0x4, 0, 0           	MOVF	r0x04, W
+000c08   1005     iorwf	0x5, 0, 0          	IORWF	r0x05, W
+000c0a   1006     iorwf	0x6, 0, 0          	IORWF	r0x06, W
+000c0c   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+000c0e   e1eb     bnz	0xbe6                	BNZ	_00167_DS_
+                                           ;	.line	300; TCPIP_Stack/LCDBlocking.c	LCDWrite(0, 0x06);	// Increment after each write, do not shift
+000c10   0e06     movlw	0x6                	MOVLW	0x06
+000c12   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000c14   0e00     movlw	0                  	MOVLW	0x00
+000c16   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000c18   ec98     call	0x1b30, 0           	CALL	_LCDWrite
+000c1a   f00d
+000c1c   0e02     movlw	0x2                	MOVLW	0x02
+000c1e   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           ;	.line	301; TCPIP_Stack/LCDBlocking.c	Delay10us(5);
+000c20   0e55     movlw	0x55               	MOVLW	0x55
+000c22   6e00     movwf	0, 0               	MOVWF	r0x00
+000c24   6a01     clrf	0x1, 0              	CLRF	r0x01
+000c26   6a02     clrf	0x2, 0              	CLRF	r0x02
+000c28   6a03     clrf	0x3, 0              	CLRF	r0x03
+                                           _00173_DS_:
+000c2a   c000     movff	0, 0x4             	MOVFF	r0x00, r0x04
+000c2c   f004
+000c2e   c001     movff	0x1, 0x5           	MOVFF	r0x01, r0x05
+000c30   f005
+000c32   c002     movff	0x2, 0x6           	MOVFF	r0x02, r0x06
+000c34   f006
+000c36   c003     movff	0x3, 0x7           	MOVFF	r0x03, r0x07
+000c38   f007
+000c3a   0eff     movlw	0xff               	MOVLW	0xff
+000c3c   2600     addwf	0, 0x1, 0          	ADDWF	r0x00, F
+000c3e   0eff     movlw	0xff               	MOVLW	0xff
+000c40   2201     addwfc	0x1, 0x1, 0       	ADDWFC	r0x01, F
+000c42   0eff     movlw	0xff               	MOVLW	0xff
+000c44   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+000c46   0eff     movlw	0xff               	MOVLW	0xff
+000c48   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+000c4a   5004     movf	0x4, 0, 0           	MOVF	r0x04, W
+000c4c   1005     iorwf	0x5, 0, 0          	IORWF	r0x05, W
+000c4e   1006     iorwf	0x6, 0, 0          	IORWF	r0x06, W
+000c50   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+000c52   e1eb     bnz	0xc2a                	BNZ	_00173_DS_
+                                           ;	.line	304; TCPIP_Stack/LCDBlocking.c	LCDWrite(0, 0x0C);	// Turn display on, no cusor, no cursor blink
+000c54   0e0c     movlw	0xc                	MOVLW	0x0c
+000c56   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000c58   0e00     movlw	0                  	MOVLW	0x00
+000c5a   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000c5c   ec98     call	0x1b30, 0           	CALL	_LCDWrite
+000c5e   f00d
+000c60   0e02     movlw	0x2                	MOVLW	0x02
+000c62   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           ;	.line	305; TCPIP_Stack/LCDBlocking.c	Delay10us(5);
+000c64   0e55     movlw	0x55               	MOVLW	0x55
+000c66   6e00     movwf	0, 0               	MOVWF	r0x00
+000c68   6a01     clrf	0x1, 0              	CLRF	r0x01
+000c6a   6a02     clrf	0x2, 0              	CLRF	r0x02
+000c6c   6a03     clrf	0x3, 0              	CLRF	r0x03
+                                           _00179_DS_:
+000c6e   c000     movff	0, 0x4             	MOVFF	r0x00, r0x04
+000c70   f004
+000c72   c001     movff	0x1, 0x5           	MOVFF	r0x01, r0x05
+000c74   f005
+000c76   c002     movff	0x2, 0x6           	MOVFF	r0x02, r0x06
+000c78   f006
+000c7a   c003     movff	0x3, 0x7           	MOVFF	r0x03, r0x07
+000c7c   f007
+000c7e   0eff     movlw	0xff               	MOVLW	0xff
+000c80   2600     addwf	0, 0x1, 0          	ADDWF	r0x00, F
+000c82   0eff     movlw	0xff               	MOVLW	0xff
+000c84   2201     addwfc	0x1, 0x1, 0       	ADDWFC	r0x01, F
+000c86   0eff     movlw	0xff               	MOVLW	0xff
+000c88   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+000c8a   0eff     movlw	0xff               	MOVLW	0xff
+000c8c   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+000c8e   5004     movf	0x4, 0, 0           	MOVF	r0x04, W
+000c90   1005     iorwf	0x5, 0, 0          	IORWF	r0x05, W
+000c92   1006     iorwf	0x6, 0, 0          	IORWF	r0x06, W
+000c94   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+000c96   e1eb     bnz	0xc6e                	BNZ	_00179_DS_
+                                           ;	.line	308; TCPIP_Stack/LCDBlocking.c	LCDWrite(0, 0x01);	
+000c98   0e01     movlw	0x1                	MOVLW	0x01
+000c9a   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000c9c   0e00     movlw	0                  	MOVLW	0x00
+000c9e   6ee5     movwf	0xe5, 0            	MOVWF	POSTDEC1
+000ca0   ec98     call	0x1b30, 0           	CALL	_LCDWrite
+000ca2   f00d
+000ca4   0e02     movlw	0x2                	MOVLW	0x02
+000ca6   26e1     addwf	0xe1, 0x1, 0       	ADDWF	FSR1L, F
+                                           ;	.line	309; TCPIP_Stack/LCDBlocking.c	DelayMs(2);
+000ca8   0e48     movlw	0x48               	MOVLW	0x48
+000caa   6e00     movwf	0, 0               	MOVWF	r0x00
+000cac   0e0d     movlw	0xd                	MOVLW	0x0d
+000cae   6e01     movwf	0x1, 0             	MOVWF	r0x01
+000cb0   6a02     clrf	0x2, 0              	CLRF	r0x02
+000cb2   6a03     clrf	0x3, 0              	CLRF	r0x03
+                                           _00185_DS_:
+000cb4   c000     movff	0, 0x4             	MOVFF	r0x00, r0x04
+000cb6   f004
+000cb8   c001     movff	0x1, 0x5           	MOVFF	r0x01, r0x05
+000cba   f005
+000cbc   c002     movff	0x2, 0x6           	MOVFF	r0x02, r0x06
+000cbe   f006
+000cc0   c003     movff	0x3, 0x7           	MOVFF	r0x03, r0x07
+000cc2   f007
+000cc4   0eff     movlw	0xff               	MOVLW	0xff
+000cc6   2600     addwf	0, 0x1, 0          	ADDWF	r0x00, F
+000cc8   0eff     movlw	0xff               	MOVLW	0xff
+000cca   2201     addwfc	0x1, 0x1, 0       	ADDWFC	r0x01, F
+000ccc   0eff     movlw	0xff               	MOVLW	0xff
+000cce   2202     addwfc	0x2, 0x1, 0       	ADDWFC	r0x02, F
+000cd0   0eff     movlw	0xff               	MOVLW	0xff
+000cd2   2203     addwfc	0x3, 0x1, 0       	ADDWFC	r0x03, F
+000cd4   5004     movf	0x4, 0, 0           	MOVF	r0x04, W
+000cd6   1005     iorwf	0x5, 0, 0          	IORWF	r0x05, W
+000cd8   1006     iorwf	0x6, 0, 0          	IORWF	r0x06, W
+000cda   1007     iorwf	0x7, 0, 0          	IORWF	r0x07, W
+000cdc   e1eb     bnz	0xcb4                	BNZ	_00185_DS_
+000cde   cfe4     movff	0xfe4, 0x8         	MOVFF	PREINC1, r0x08
+000ce0   f008
+000ce2   cfe4     movff	0xfe4, 0x7         	MOVFF	PREINC1, r0x07
+000ce4   f007
+000ce6   cfe4     movff	0xfe4, 0x6         	MOVFF	PREINC1, r0x06
+000ce8   f006
+000cea   cfe4     movff	0xfe4, 0x5         	MOVFF	PREINC1, r0x05
+000cec   f005
+000cee   cfe4     movff	0xfe4, 0x4         	MOVFF	PREINC1, r0x04
+000cf0   f004
+000cf2   cfe4     movff	0xfe4, 0x3         	MOVFF	PREINC1, r0x03
+000cf4   f003
+000cf6   cfe4     movff	0xfe4, 0x2         	MOVFF	PREINC1, r0x02
+000cf8   f002
+000cfa   cfe4     movff	0xfe4, 0x1         	MOVFF	PREINC1, r0x01
+000cfc   f001
+000cfe   cfe4     movff	0xfe4, 0           	MOVFF	PREINC1, r0x00
+000d00   f000
+000d02   cfe4     movff	0xfe4, 0xfd9       	MOVFF	PREINC1, FSR2L
+000d04   ffd9
+000d06   0012     return	0                 	RETURN	
+                                           
+                                           ; ; Starting pCode block
+                                           S_LCDBlocking__LCDWrite	code
+                                           _LCDWrite:
+                                           ;	.line	94; TCPIP_Stack/LCDBlocking.c	static void LCDWrite(BYTE RS, BYTE Data)
+001b30   cfd9     movff	0xfd9, 0xfe5       	MOVFF	FSR2L, POSTDEC1
+001b32   ffe5
+001b34   cfe1     movff	0xfe1, 0xfd9       	MOVFF	FSR1L, FSR2L
+001b36   ffd9
+001b38   c000     movff	0, 0xfe5           	MOVFF	r0x00, POSTDEC1
+001b3a   ffe5
+001b3c   c001     movff	0x1, 0xfe5         	MOVFF	r0x01, POSTDEC1
+001b3e   ffe5
+001b40   0e02     movlw	0x2                	MOVLW	0x02
+001b42   cfdb     movff	0xfdb, 0           	MOVFF	PLUSW2, r0x00
+001b44   f000
+001b46   0e03     movlw	0x3                	MOVLW	0x03
+001b48   cfdb     movff	0xfdb, 0x1         	MOVFF	PLUSW2, r0x01
+001b4a   f001
+                                           ;	.line	97; TCPIP_Stack/LCDBlocking.c	LCD_DATA_TRIS = 0x00;
+001b4c   6a96     clrf	0x96, 0             	CLRF	_TRISE
+                                           ;	.line	110; TCPIP_Stack/LCDBlocking.c	LCD_RS_TRIS = 0;
+001b4e   9499     bcf	0x99, 0x2, 0         	BCF	_TRISHbits, 2
+                                           ;	.line	111; TCPIP_Stack/LCDBlocking.c	LCD_RD_WR_TRIS = 0;
+001b50   9299     bcf	0x99, 0x1, 0         	BCF	_TRISHbits, 1
+                                           ;	.line	112; TCPIP_Stack/LCDBlocking.c	LCD_RD_WR_IO = 0;
+001b52   9290     bcf	0x90, 0x1, 0         	BCF	_LATHbits, 1
+                                           ;	.line	113; TCPIP_Stack/LCDBlocking.c	LCD_RS_IO = RS;
+001b54   5000     movf	0, 0, 0             	MOVF	r0x00, W
+001b56   0b01     andlw	0x1                	ANDLW	0x01
+001b58   44e8     rlncf	0xe8, 0, 0         	RLNCF	WREG, W
+001b5a   44e8     rlncf	0xe8, 0, 0         	RLNCF	WREG, W
+001b5c   6ef4     movwf	0xf4, 0            	MOVWF	PRODH
+001b5e   5090     movf	0x90, 0, 0          	MOVF	_LATHbits, W
+001b60   0bfb     andlw	0xfb               	ANDLW	0xfb
+001b62   10f4     iorwf	0xf4, 0, 0         	IORWF	PRODH, W
+001b64   6e90     movwf	0x90, 0            	MOVWF	_LATHbits
+                                           ;	.line	140; TCPIP_Stack/LCDBlocking.c	LCD_DATA_IO = Data;
+001b66   c001     movff	0x1, 0xf8d         	MOVFF	r0x01, _LATE
+001b68   ff8d
+001b6a   0000     nop                      	nop 
+001b6c   0000     nop                      	nop 
+                                           ;	.line	155; TCPIP_Stack/LCDBlocking.c	LCD_E_IO = 1;
+001b6e   8090     bsf	0x90, 0, 0           	BSF	_LATHbits, 0
+001b70   0000     nop                      	nop 
+001b72   0000     nop                      	nop 
+001b74   0000     nop                      	nop 
+001b76   0000     nop                      	nop 
+001b78   0000     nop                      	nop 
+001b7a   0000     nop                      	nop 
+001b7c   0000     nop                      	nop 
+001b7e   0000     nop                      	nop 
+001b80   0000     nop                      	nop 
+                                           ;	.line	165; TCPIP_Stack/LCDBlocking.c	LCD_E_IO = 0;
+001b82   9090     bcf	0x90, 0, 0           	BCF	_LATHbits, 0
+001b84   cfe4     movff	0xfe4, 0x1         	MOVFF	PREINC1, r0x01
+001b86   f001
+001b88   cfe4     movff	0xfe4, 0           	MOVFF	PREINC1, r0x00
+001b8a   f000
+001b8c   cfe4     movff	0xfe4, 0xfd9       	MOVFF	PREINC1, FSR2L
+001b8e   ffd9
+001b90   0012     return	0                 	RETURN	
+                                           
+                                           
+                                           
+                                           ; Statistics:
+                                           ; code size:	 1496 (0x05d8) bytes ( 1.14%)
+                                           ;           	  748 (0x02ec) words
+                                           ; udata size:	   33 (0x0021) bytes ( 0.86%)
+                                           ; access size:	    9 (0x0009) bytes
+                                           
+                                           
+                                           	end

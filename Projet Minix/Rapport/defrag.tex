@@ -1,0 +1,17 @@
+Au niveau de la fonction de défragmentation, la première phase est similaire à ce que nous avons produit pour \textsc{nfrag}. Le seul changement se situe dans la fonction implémentée dans le processus \textsc{MFS}. Ici, il ne s'agit plus de seulement compter le nombre de fragments, mais bien de le déplacer si nécessaire, afin que le fichier soit contigu. Les fichiers modifiés sont : \begin{itemize}
+\item \textsc{frags.c} : ajout de l'implémentation de la méthode de défragmentation
+\item \textsc{cache.c} : ajout de la méthode \textsc{find$\_$n$\_$contig$\_$zone} renvoyant le premier bit d'identification d'une suite de zone suffisament grande permettant de placer le fichier de manière contigue. Elle renvoie la constante \textsc{NO$\_$BIT} si aucun espace n'a été trouvé.
+\end{itemize}
+\subsection*{Choix d'implémentation}
+Comme \textsc{Minix} est un système d'exploitation mono-utilisateur, nous avons émis l'hypothèse qu'aucun autre processus ne va essayer d'accéder au fichier en cours de défragmentation. 
+Voici notre manière de gérer le problème posé :
+\begin{itemize}
+\item Récupération de l'\textsc{inode} et comptage du nombre de fragments similaire à \textsc{nfrag}. S'il n'y a qu'un seul fragment, l'appel se termine, la défragmentation est inutile.
+\item On calcule le nombre de zones qu'occupe le fichier. Attention, lors de la division de la taille du fichier par la taille d'une zone, s'il y a un reste, il faut incrémenter le nombre de zone pour avoir de la place pour tout le fichier.
+\item On exécute ensuite une méthode permettant de trouver l'index du début d'une suite de zone permettant de placer le fichier de manière contigue. Cette méthode est implémentée dans le fichier \textsc{cache.c} aux côtés des fonctions d'allocation de zone. Nommée \textsc{find$\_$n$\_$contig$\_$zone}, elle prend en argument la partition à utiliser, ainsi que le nombre de zones libres consécutives à trouver. On démarre notre recherche au premier bit libre de la \textsc{ZMAP}, connu grâce au super bloc. Après quelques calculs de taille des différents index et éléments de la \textsc{ZMAP}, on charge le bloc contenant le premier bit libre. En convertissant les morceaux du bloc en binaire, on peut faire des tests bit à bit pour savoir si les zones sont libres. Une fois chaque morceau du bloc testé, on replace le bloc et on charge le suivant jusqu'à trouver une zone correspondant à celle demandée ou atteindre la fin de la \textsc{ZMAP}. Le premier bit de la zone trouvée est renvoyé, la constante \textsc{NO$\_$BIT} est utilisée si l'espace libre n'a pas été trouvé.
+\item L'appel système se termine si aucune zone n'a été trouvée. Dans le cas inverse, la méthode alloue tous les bits nécessaires au placement du fichier (dans la \textsc{ZMAP}). 
+\item L'objectif suivant est de recopier le fichier dans la zone trouvée. On va donc copier bloc par bloc le fichier en incrémentant un offset d'une longueur de bloc pour les blocs sources. Pour le bloc de destination, on incrémente son index de '$1$'. 
+\item Il ne nous reste qu'à mettre à jour les pointeurs de zones dans l'\textsc{inode} du fichier. On va d'abord libérer les zones mémoires utilisées précédemment et ensuite relier l'\textsc{inode} aux nouvelles zones grâce à la méthode \textsc{write$\_$map}
+\end{itemize}
+
+L'appel système affiche le statut de l'opération avant et après la défragmentation. Il renvoie le nombre de fragments (normalement '$1$' si l'opération s'est déroulée complètement) ou le code d'erreur, comme la fonction \textsc{nfrag}.

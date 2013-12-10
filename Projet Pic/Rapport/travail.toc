@@ -1,0 +1,4 @@
+\select@language {french}
+\contentsline {section}{\numberline {1}Introduction}{1}{section.0.1}
+\contentsline {section}{\numberline {2}Test de la vitesse d'horloge}{1}{section.0.2}
+\contentsline {section}{\numberline {3}R\IeC {\'e}veil}{2}{section.0.3}

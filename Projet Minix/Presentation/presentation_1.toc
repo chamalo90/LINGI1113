@@ -1,0 +1,2 @@
+\beamer@endinputifotherversion {3.10pt}
+\beamer@sectionintoc {1}{Pr\IeC {\'e}sentation de l'architecture}{2}{0}{1}
